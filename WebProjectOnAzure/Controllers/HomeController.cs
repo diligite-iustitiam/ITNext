@@ -18,7 +18,23 @@ namespace WebProjectOnAzure.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
+        {
+            return View();
+        }
+        public IActionResult News()
+        {
+            return View();
+        }
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult Fashion()
+        {
+            return View();
+        }
+        public IActionResult Products()
         {
             return View();
         }
