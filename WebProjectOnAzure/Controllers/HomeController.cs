@@ -17,24 +17,23 @@ namespace WebProjectOnAzure.Controllers
         {
             return View();
         }
-
+        public IActionResult Home()
+        {
+            return View();
+        }
         public IActionResult About()
         {
             return View();
         }
-        public IActionResult News()
+        public IActionResult Blog()
         {
             return View();
         }
-        public IActionResult Contact()
+        public IActionResult BlogDetail()
         {
             return View();
         }
-        public IActionResult Fashion()
-        {
-            return View();
-        }
-        public IActionResult Products()
+        public IActionResult BlogGrid()
         {
             return View();
         }
