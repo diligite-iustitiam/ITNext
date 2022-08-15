@@ -1,0 +1,78 @@
+﻿@model IEnumerable<WebProjectOnAzure.Models.ITShop>
+
+@{
+    ViewData["Title"] = "ShopIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+  <head>
+<link rel="stylesheet" href="~/css/style.css" />
+</head>
+
+<p>
+    <a asp-action="ProductCreate" asp-controller="Shop">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ITProductDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ITProductPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ITProductPhoto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ITProductDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ITProductPrice)
+            </td>
+            <td>    
+                @if (item.ITProductPhoto != null)
+               {
+           <img class="img-responsive" src="@Url.Content(item.ITProductPhoto)" alt=""> 
+                }
+                
+            </td>
+            
+            <td>
+                @Html.ActionLink("Edit", "ProductEdit", new {  id=item.Id }) |
+                @Html.ActionLink("Details", "ProductDetails", new {  id=item.Id  }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+ 
+   
+    

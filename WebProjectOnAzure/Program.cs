@@ -1,17 +1,23 @@
 using WebProjectOnAzure.Models;
-using WebProjectOnAzure.Data;
+using WebProjectOnAzure.Services;
 using Microsoft.EntityFrameworkCore;
+using WebProjectOnAzure.Data;
+using Microsoft.AspNetCore.Mvc;
+using WebProjectOnAzure.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSignalR();
+builder.Services.AddScoped<ITShopService>();
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("DefaultConnection"));
 
-var AcademyConnection = builder.Configuration.GetConnectionString("DefaultConnection");
-var SqLiteconnection = builder.Configuration.GetConnectionString("NorthwindConnection");
-var SchoolConnection = builder.Configuration.GetConnectionString("SchoolConnection");
-
-// Add services to the container.
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
 builder.Services.AddControllersWithViews();
-builder.Services.AddSchoolContext();
 
 var app = builder.Build();
 
@@ -31,7 +37,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.MapHub<ChatHub>("/Home/Chat");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
