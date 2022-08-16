@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+
 using WebProjectOnAzure.Models;
 
 namespace WebProjectOnAzure.Controllers
@@ -7,16 +10,20 @@ namespace WebProjectOnAzure.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            
         }
 
+      
         public IActionResult Index()
         {
+            
             return View();
         }
+        
         public IActionResult Home()
         {
             return View();
