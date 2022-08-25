@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using WebProjectOnAzure.Services;
 using WebProjectOnAzure.Models;
+using Microsoft.AspNetCore.Session;
 
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -12,11 +13,45 @@ namespace WebProjectOnAzure.Controllers
     {
         private readonly ITShopService _shopService;
 
-        public ShopController(ITShopService shopService) =>
+        public  ShopController(ITShopService shopService) =>
             _shopService = shopService;
-        public ActionResult ShopIndex()
+        public ActionResult Index()
         {
-            return View(_shopService.Get());
+            List<ITShop> tShops = _shopService.Get().ToList();
+            return View(tShops);
+        }
+        public ActionResult Shop()
+        {
+            List<ITShop> courses = _shopService.Get().ToList();
+            return View(courses);
+        }
+        public ActionResult ShopDetail(string id)
+        {
+            
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var shop = _shopService.Get(id);
+            if (shop == null)
+            {
+                return NotFound();
+            }
+            return View(shop);
+        }
+        public ActionResult ShopIndex(int pg = 1)
+        {
+            List<ITShop> courses = _shopService.Get().ToList();
+            const int pageSize = 5;
+            if (pg < 1)
+                pg = 1;
+            int recsCount = courses.Count;
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recsSkip = (pg - 1) * pageSize;
+            var data = courses.Skip(recsSkip).Take(pager.PageSize).ToList();
+            this.ViewBag.Pager = pager;
+            return View( data);
         }
 
         // GET: Cars/Details/5
@@ -34,6 +69,7 @@ namespace WebProjectOnAzure.Controllers
             }
             return View(shop);
         }
+        
 
         // GET: Cars/Create
         public IActionResult ProductCreate()
@@ -53,6 +89,14 @@ namespace WebProjectOnAzure.Controllers
             }
             return View(shop);
         }
+        public ActionResult ShoppingCart()
+        {
+
+
+            return View();
+            
+        }
+        
 
         // GET: Cars/Edit/5
         public IActionResult ProductEdit(string id)

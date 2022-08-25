@@ -85,39 +85,42 @@
           <div class="menu_side">
             <div id="navbar_menu">
               <ul class="first-ul">
-                <li> <a href="it_home.html">Home</a>
+                  <li> <a asp-action="ShopIndex" asp-controller="Shop">IndexShop</a>
+                <li> <a asp-action="Home" asp-controller="Home">Home</a>
                   <ul>
-                    <li><a href="it_home.html">It Home Page</a></li>
-                    <li><a href="it_home_dark.html">It Dark Home Page</a></li>
+                    <li> <a asp-action="Home" asp-controller="Home">Home</a>
+                     
                   </ul>
                 </li>
-                <li><a href="it_about.html">About Us</a></li>
-                <li> <a href="it_service.html">Service</a>
+                 <li><a asp-action="Chat" asp-controller="Home">Chat</a></li>
+               <li> <a asp-action="About" asp-controller="Home">About us</a>
+                <li> <a asp-action="Service" asp-controller="Home">Service</a>
                   <ul>
-                    <li><a href="it_service_list.html">Services list</a></li>
-                    <li><a href="it_service_detail.html">Services Detail</a></li>
+                    <li> <a asp-action="ServiceList" asp-controller="Home">Service List</a>
+                    <li> <a asp-action="ServiceDetail" asp-controller="Home">Service Details</a>
                   </ul>
                 </li>
-                <li> <a class="active" href="it_blog.html">Blog</a>
+                <li> <a asp-action="Blog" asp-controller="Home">Blog</a>
                   <ul>
-                    <li><a href="it_blog.html">Blog List</a></li>
-                    <li><a href="it_blog_grid.html">Blog Grid</a></li>
-                    <li><a href="it_blog_detail.html">Blog Detail</a></li>
+                    <li> <a asp-action="Blog" asp-controller="Home">Blog List</a>
+                    <li> <a asp-action="BlogGrid" asp-controller="Home">Blog Grid</a>
+                    <li> <a asp-action="BlogDetail" asp-controller="Home">Blog Detail</a>
                   </ul>
                 </li>
                 <li> <a href="#">Pages</a>
                   <ul>
-                    <li><a href="it_career.html">Career</a></li>
-                    <li><a href="it_price.html">Pricing</a></li>
-                    <li><a href="it_faq.html">Faq</a></li>
-                    <li><a href="it_privacy_policy.html">Privacy Policy</a></li>
-                    <li><a href="it_error.html">Error 404</a></li>
+                     <li> <a asp-action="Career" asp-controller="Home">Career</a>
+                        
+                    <li> <a asp-action="Price" asp-controller="Home">Price</a>
+                     <li> <a asp-action="FAQ" asp-controller="Home">FAQ</a>
+                   <li> <a asp-action="Privacy" asp-controller="Home">Privacy Policy</a>
+                    <li> <a asp-action="Error" asp-controller="Home">404</a>
                   </ul>
                 </li>
-                <li> <a href="it_shop.html">Shop</a>
+                 <li> <a asp-action="Shop" asp-controller="Shop">Shop</a>
                   <ul>
                     <li><a href="it_shop.html">Shop List</a></li>
-                    <li><a href="it_shop_detail.html">Shop Detail</a></li>
+                    <li> <a asp-action="ShopDetail" asp-controller="Home">Shop Details</a>
                     <li><a href="it_cart.html">Shopping Cart</a></li>
                     <li><a href="it_checkout.html">Checkout</a></li>
                   </ul>
@@ -135,6 +138,7 @@
                 <li><a href="#" data-toggle="modal" data-target="#search_bar"><i class="fa fa-search" aria-hidden="true"></i></a></li>
               </ul>
             </div>
+            <partial name="_LoginPartial"/>
           </div>
           <!-- menu end -->
         </div>
@@ -174,7 +178,7 @@
           <div class="blog_section">
             <div class="blog_feature_img"> <img class="img-responsive" src="~/images/it_service/22.jpg" alt="#"> </div>
             <div class="blog_feature_cantant">
-              <p class="blog_head">Blogpost With Image</p>
+              <p class="blog_head">EaseUS Partition Master</p>
               <div class="post_info">
                 <ul>
                   <li><i class="fa fa-user" aria-hidden="true"></i> Marketing</li>
@@ -182,9 +186,8 @@
                   <li><i class="fa fa-calendar" aria-hidden="true"></i> 12 Aug 2017</li>
                 </ul>
               </div>
-              <p>Consectetur, assumenda provident lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae laboriosam sunt hic perspiciatis, 
-                asperiores mollitia excepturi voluptatibus sequi nostrum ipsam veniam omnis nihil! A ea maiores corporis. Lorem ipsum dolor sit amet, 
-                consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+              <p>You can repair SSD manually or use EaseUS Partition Master - an SSD repair tool to help you fix corrupted SSD.
+                  If all these methods don't work out well, contact your SSD manufacturer and see if they have any better solutions for you </p>
               <div class="bottom_info">
                 <div class="pull-left"><a class="read_more" href="it_blog_detail.html">READ MORE <i class="fa fa-angle-right"></i></a></div>
                 <div class="pull-right">
@@ -203,7 +206,7 @@
           </div>
           <div class="blog_section">
             <div class="blog_feature_cantant theme_color_bg white_fonts">
-              <p class="blog_head">Blogpost With Image</p>
+              <p class="blog_head">Hard drive repair</p>
               <div class="post_info">
                 <ul>
                   <li><i class="fa fa-user" aria-hidden="true"></i> Marketing</li>
@@ -211,9 +214,9 @@
                   <li><i class="fa fa-calendar" aria-hidden="true"></i> 12 Aug 2017</li>
                 </ul>
               </div>
-              <p>Consectetur, assumenda provident lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae laboriosam sunt hic perspiciatis, 
-                asperiores mollitia excepturi voluptatibus sequi nostrum ipsam veniam omnis nihil! A ea maiores corporis. Lorem ipsum dolor sit amet, 
-                consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+              <p>Hard drive repair is possible, but they should NOT be reused after a recovery! Of course, HDDs can be repaired!
+                  However, a repaired HDD should not be reused, but rather, have its contents recovered immediately and then be
+                  discarded as it cannot be trusted to work into the future. </p>
               <div class="bottom_info">
                 <div class="pull-left"><a class="read_more" href="it_blog_detail.html">READ MORE <i class="fa fa-angle-right"></i></a></div>
                 <div class="pull-right">
@@ -236,7 +239,7 @@
         <div class="full">
           <div class="blog_section">
             <div class="blog_feature_cantant theme_color_bg white_fonts">
-              <p class="blog_head">Blogpost With Image</p>
+              <p class="blog_head">What is the most reliable data recovery software?</p>
               <div class="post_info">
                 <ul>
                   <li><i class="fa fa-user" aria-hidden="true"></i> Marketing</li>
@@ -244,9 +247,14 @@
                   <li><i class="fa fa-calendar" aria-hidden="true"></i> 12 Aug 2017</li>
                 </ul>
               </div>
-              <p>Consectetur, assumenda provident lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae laboriosam sunt hic perspiciatis, 
-                asperiores mollitia excepturi voluptatibus sequi nostrum ipsam veniam omnis nihil! A ea maiores corporis. Lorem ipsum dolor sit amet, 
-                consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+              <p>FonePaw Data Recovery.
+                    R-Studio Data Recovery Software.
+                    PhotoRec.
+                    TestDisk.
+                    PC Inspector File Recovery.
+                    Wise Data Recovery.
+                    Undelete 360.
+                    Disk Drill. </p>
               <div class="bottom_info">
                 <div class="pull-left"><a class="read_more" href="it_blog_detail.html">READ MORE <i class="fa fa-angle-right"></i></a></div>
                 <div class="pull-right">
@@ -266,7 +274,7 @@
           <div class="blog_section">
             <div class="blog_feature_img"> <img class="img-responsive" src="~/images/it_service/dark_bg_img2.png" alt="#"> </div>
             <div class="blog_feature_cantant">
-              <p class="blog_head">Blogpost With Image</p>
+              <p class="blog_head">Which site offers a free download for data recovery software?</p>
               <div class="post_info">
                 <ul>
                   <li><i class="fa fa-user" aria-hidden="true"></i> Marketing</li>
@@ -274,9 +282,8 @@
                   <li><i class="fa fa-calendar" aria-hidden="true"></i> 12 Aug 2017</li>
                 </ul>
               </div>
-              <p>Consectetur, assumenda provident lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae laboriosam sunt hic perspiciatis, 
-                asperiores mollitia excepturi voluptatibus sequi nostrum ipsam veniam omnis nihil! A ea maiores corporis. Lorem ipsum dolor sit amet, 
-                consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+              <p>EaseUS® free data recovery software is your second to none choice for quick but complete file
+                  recovery from Windows desktops, laptops, and other Windows-compatible devices. </p>
               <div class="bottom_info">
                 <div class="pull-left"><a class="read_more" href="it_blog_detail.html">READ MORE <i class="fa fa-angle-right"></i></a></div>
                 <div class="pull-right">
@@ -303,7 +310,7 @@
           <div class="blog_section" style="margin-bottom: 0;">
             <div class="blog_feature_img"> <img class="img-responsive" src="~/images/it_service/22.jpg" alt="#"> </div>
             <div class="blog_feature_cantant">
-              <p class="blog_head">Blogpost With Image</p>
+              <p class="blog_head">Do data recovery programs work?</p>
               <div class="post_info">
                 <ul>
                   <li><i class="fa fa-user" aria-hidden="true"></i> Marketing</li>
@@ -311,9 +318,7 @@
                   <li><i class="fa fa-calendar" aria-hidden="true"></i> 12 Aug 2017</li>
                 </ul>
               </div>
-              <p>Consectetur, assumenda provident lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae laboriosam sunt hic perspiciatis, 
-                asperiores mollitia excepturi voluptatibus sequi nostrum ipsam veniam omnis nihil! A ea maiores corporis. Lorem ipsum dolor sit amet, 
-                consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+              <p>In general, data recovery works because, even after a file is 'lost' or deleted, all or most of the information about that file still remains on the storage device. The only time that data recovery is a complete lost cause is when a file was never written in the first place. </p>
               <div class="bottom_info">
                 <div class="pull-left"><a class="read_more" href="it_blog_detail.html">READ MORE <i class="fa fa-angle-right"></i></a></div>
                 <div class="pull-right">

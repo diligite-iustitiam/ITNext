@@ -1,11 +1,12 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebProjectOnAzure.Models
 {
     
-    public class ITShop
+    public class ITShop 
     {
         
         [BsonId]
@@ -30,5 +31,7 @@ namespace WebProjectOnAzure.Models
         [Required]
         public string? ITProductPhoto { get; set; }
 
+        
+        
     }
 }

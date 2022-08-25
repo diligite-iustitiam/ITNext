@@ -1,6 +1,6 @@
 using WebProjectOnAzure.Models;
 using WebProjectOnAzure.Services;
-
+using WebProjectOnAzure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -8,11 +8,31 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using WebProjectOnAzure.Data;
+
+
 
 
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("IdentityContextConnection") ?? throw new InvalidOperationException("Connection string 'IdentityContextConnection' not found.");
+var shopconnection = builder.Configuration.GetConnectionString("ShopContextConnection");
+
+builder.Services.AddDbContext<IdentityContext>(options =>
+    options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<ShopContext>(options =>
+    options.UseSqlServer(shopconnection));
+builder.Services.AddSession();
+
+builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+        .AddEntityFrameworkStores<IdentityContext>();
+
+
+
+
 builder.Services.AddScoped<ITShopService>();
+
+builder.Services.AddSession();
 
 builder.Services.AddSignalR();
 
@@ -68,10 +88,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthentication();;
-
+app.UseSession();
 app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.MapRazorPages();
+app.UseSession();
 app.Run();

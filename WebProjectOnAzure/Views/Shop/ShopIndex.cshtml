@@ -1,12 +1,22 @@
-﻿@model IEnumerable<WebProjectOnAzure.Models.ITShop>
+﻿@using WebProjectOnAzure.Models
+@model IEnumerable<WebProjectOnAzure.Models.ITShop>
 
 @{
     ViewData["Title"] = "ShopIndex";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Pager pager = new Pager();
+    int PageNo = 0;
+    if(ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        PageNo = pager.CurrentPage;
+    }
 }
 
 
+
   <head>
+      
 <link rel="stylesheet" href="~/css/style.css" />
 </head>
 
@@ -71,8 +81,21 @@
             </td>
         </tr>
 }
+               @if (pager.TotalPages > 0)
+{
+    <ul class="pagination">
+        @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+        {
+            <li class="pagination_li pageNumber page-item @(pge == pager.CurrentPage ? "active" : "")">
+                <a class="pagination_a" asp-controller = "Shop" asp-action="ShopIndex" asp-route-pg="@pge">@pge</a>
+            </li>
+        }
+    </ul>
+} 
     </tbody>
 </table>
- 
+
+
+<script src="~/js/pagination.js"></script>
    
     

@@ -81,43 +81,46 @@
           <!-- logo end -->
         </div>
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-          <!-- menu start -->
+         <!-- menu start -->
           <div class="menu_side">
             <div id="navbar_menu">
               <ul class="first-ul">
-                <li> <a href="it_home.html">Home</a>
+                  <li> <a asp-action="ShopIndex" asp-controller="Shop">IndexShop</a>
+                <li> <a asp-action="Home" asp-controller="Home">Home</a>
                   <ul>
-                    <li><a href="it_home.html">It Home Page</a></li>
-                    <li><a href="it_home_dark.html">It Dark Home Page</a></li>
+                    <li> <a asp-action="Home" asp-controller="Home">Home</a>
+                     
                   </ul>
                 </li>
-                <li><a href="it_about.html">About Us</a></li>
-                <li> <a href="it_service.html">Service</a>
+                 <li><a asp-action="Chat" asp-controller="Home">Chat</a></li>
+               <li> <a asp-action="About" asp-controller="Home">About us</a>
+                <li> <a asp-action="Service" asp-controller="Home">Service</a>
                   <ul>
-                    <li><a href="it_service_list.html">Services list</a></li>
-                    <li><a href="it_service_detail.html">Services Detail</a></li>
+                    <li> <a asp-action="ServiceList" asp-controller="Home">Service List</a>
+                    <li> <a asp-action="ServiceDetail" asp-controller="Home">Service Details</a>
                   </ul>
                 </li>
-                <li> <a class="active" href="it_blog.html">Blog</a>
+                <li> <a asp-action="Blog" asp-controller="Home">Blog</a>
                   <ul>
-                    <li><a href="it_blog.html">Blog List</a></li>
-                    <li><a href="it_blog_grid.html">Blog Grid</a></li>
-                    <li><a asp-action="BlogDetail" asp-controller="Home">Blog Details</a></li>
+                    <li> <a asp-action="Blog" asp-controller="Home">Blog List</a>
+                    <li> <a asp-action="BlogGrid" asp-controller="Home">Blog Grid</a>
+                    <li> <a asp-action="BlogDetail" asp-controller="Home">Blog Detail</a>
                   </ul>
                 </li>
                 <li> <a href="#">Pages</a>
                   <ul>
-                    <li><a href="it_career.html">Career</a></li>
-                    <li><a href="it_price.html">Pricing</a></li>
-                    <li><a href="it_faq.html">Faq</a></li>
-                    <li><a href="it_privacy_policy.html">Privacy Policy</a></li>
-                    <li><a href="it_error.html">Error 404</a></li>
+                     <li> <a asp-action="Career" asp-controller="Home">Career</a>
+                        
+                    <li> <a asp-action="Price" asp-controller="Home">Price</a>
+                     <li> <a asp-action="FAQ" asp-controller="Home">FAQ</a>
+                   <li> <a asp-action="Privacy" asp-controller="Home">Privacy Policy</a>
+                    <li> <a asp-action="Error" asp-controller="Home">404</a>
                   </ul>
                 </li>
-                <li> <a href="it_shop.html">Shop</a>
+                 <li> <a asp-action="Shop" asp-controller="Shop">Shop</a>
                   <ul>
                     <li><a href="it_shop.html">Shop List</a></li>
-                    <li><a href="it_shop_detail.html">Shop Detail</a></li>
+                    <li> <a asp-action="ShopDetail" asp-controller="Home">Shop Details</a>
                     <li><a href="it_cart.html">Shopping Cart</a></li>
                     <li><a href="it_checkout.html">Checkout</a></li>
                   </ul>
@@ -135,6 +138,7 @@
                 <li><a href="#" data-toggle="modal" data-target="#search_bar"><i class="fa fa-search" aria-hidden="true"></i></a></li>
               </ul>
             </div>
+            <partial name="_LoginPartial"/>
           </div>
           <!-- menu end -->
         </div>
@@ -174,7 +178,7 @@
           <div class="blog_section">
             <div class="blog_feature_img"> <img class="img-responsive" src="~/images/it_service/post-06.jpg" alt="#"> </div>
             <div class="blog_feature_cantant">
-              <p class="blog_head">Blogpost With Image</p>
+              <p class="blog_head">BlogPost</p>
               <div class="post_info">
                 <ul>
                   <li><i class="fa fa-user" aria-hidden="true"></i> Marketing</li>
@@ -182,9 +186,7 @@
                   <li><i class="fa fa-calendar" aria-hidden="true"></i> 12 Aug 2017</li>
                 </ul>
               </div>
-              <p>Consectetur, assumenda provident lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae laboriosam sunt hic perspiciatis, 
-                asperiores mollitia excepturi voluptatibus sequi nostrum ipsam veniam omnis nihil! A ea maiores corporis. Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+              <p>These Fellows are important not only for the expertise that they bring but for the diversity of thought they represent. </p>
               <div class="bottom_info">
                 <div class="pull-left"><a class="btn sqaure_bt" href="it_blog_detail.html">Read More<i class="fa fa-angle-right"></i></a></div>
                 <div class="pull-right">
@@ -204,7 +206,7 @@
           <div class="blog_section">
             <div class="blog_feature_img"> <img class="img-responsive" src="~/images/it_service/post-08.jpg" alt="#"> </div>
             <div class="blog_feature_cantant">
-              <p class="blog_head">Blogpost With Image</p>
+              <p class="blog_head">SSD</p>
               <div class="post_info">
                 <ul>
                   <li><i class="fa fa-user" aria-hidden="true"></i> Marketing</li>
@@ -212,9 +214,7 @@
                   <li><i class="fa fa-calendar" aria-hidden="true"></i> 12 Aug 2017</li>
                 </ul>
               </div>
-              <p>Consectetur, assumenda provident lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae laboriosam sunt hic perspiciatis, 
-                asperiores mollitia excepturi voluptatibus sequi nostrum ipsam veniam omnis nihil! A ea maiores corporis. Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+              <p>Read more about how SSDs work and our process for data recovery in this blog post. </p>
               <div class="bottom_info">
                 <div class="pull-left"><a class="btn sqaure_bt" href="it_blog_detail.html">Read More<i class="fa fa-angle-right"></i></a></div>
                 <div class="pull-right">
@@ -234,7 +234,7 @@
           <div class="blog_section">
             <div class="blog_feature_img"> <img class="img-responsive" src="~/images/it_service/home_01.png" alt="#"> </div>
             <div class="blog_feature_cantant">
-              <p class="blog_head">Blogpost With Image</p>
+              <p class="blog_head">EFS Data Recovery</p>
               <div class="post_info">
                 <ul>
                   <li><i class="fa fa-user" aria-hidden="true"></i> Marketing</li>
@@ -242,9 +242,7 @@
                   <li><i class="fa fa-calendar" aria-hidden="true"></i> 12 Aug 2017</li>
                 </ul>
               </div>
-              <p>Consectetur, assumenda provident lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae laboriosam sunt hic perspiciatis, 
-                asperiores mollitia excepturi voluptatibus sequi nostrum ipsam veniam omnis nihil! A ea maiores corporis. Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+              <p>Advanced EFS Data Recovery is a powerful data recovery tool that helps recovering the encrypted files under various circumstances. </p>
               <div class="bottom_info">
                 <div class="pull-left"><a class="btn sqaure_bt" href="it_blog_detail.html">Read More<i class="fa fa-angle-right"></i></a></div>
                 <div class="pull-right">
@@ -285,8 +283,7 @@
           </div>
           <div class="side_bar_blog">
             <h4>ABOUT AUTHOR</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. sed do eiusmod tempor.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>A description of peer review processes, including the obligation to handle submitted material.</p>
           </div>
           <div class="side_bar_blog">
             <h4>RECENT POST</h4>

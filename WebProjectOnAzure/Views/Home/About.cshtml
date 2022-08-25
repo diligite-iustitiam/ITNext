@@ -81,43 +81,46 @@
           <!-- logo end -->
         </div>
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-          <!-- menu start -->
+         <!-- menu start -->
           <div class="menu_side">
             <div id="navbar_menu">
               <ul class="first-ul">
-                <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+                  <li> <a asp-action="ShopIndex" asp-controller="Shop">IndexShop</a>
+                <li> <a asp-action="Home" asp-controller="Home">Home</a>
                   <ul>
-                    <li><a href="it_home.html">It Home Page</a></li>
-                    <li><a href="it_home_dark.html">It Dark Home Page</a></li>
+                    <li> <a asp-action="Home" asp-controller="Home">Home</a>
+                     
                   </ul>
                 </li>
-                <li><a class="active" href="it_about.html">About Us</a></li>
-                <li> <a href="it_service.html">Service</a>
+                 <li><a asp-action="Chat" asp-controller="Home">Chat</a></li>
+               <li> <a asp-action="About" asp-controller="Home">About us</a>
+                <li> <a asp-action="Service" asp-controller="Home">Service</a>
                   <ul>
-                    <li><a href="it_service_list.html">Services list</a></li>
-                    <li><a href="it_service_detail.html">Services Detail</a></li>
+                    <li> <a asp-action="ServiceList" asp-controller="Home">Service List</a>
+                    <li> <a asp-action="ServiceDetail" asp-controller="Home">Service Details</a>
                   </ul>
                 </li>
-                <li><a asp-action="Blog" asp-controller="Home">Blog</a></li>
+                <li> <a asp-action="Blog" asp-controller="Home">Blog</a>
                   <ul>
-                    <li><a asp-action="Blog" asp-controller="Home">Blog</a></li>
-                    <li><a href="it_blog_grid.html">Blog Grid</a></li>
-                    <li><a href="it_blog_detail.html">Blog Detail</a></li>
+                    <li> <a asp-action="Blog" asp-controller="Home">Blog List</a>
+                    <li> <a asp-action="BlogGrid" asp-controller="Home">Blog Grid</a>
+                    <li> <a asp-action="BlogDetail" asp-controller="Home">Blog Detail</a>
                   </ul>
                 </li>
                 <li> <a href="#">Pages</a>
                   <ul>
-                    <li><a href="it_career.html">Career</a></li>
-                    <li><a href="it_price.html">Pricing</a></li>
-                    <li><a href="it_faq.html">Faq</a></li>
-                    <li><a href="it_privacy_policy.html">Privacy Policy</a></li>
-                    <li><a href="it_error.html">Error 404</a></li>
+                     <li> <a asp-action="Career" asp-controller="Home">Career</a>
+                        
+                    <li> <a asp-action="Price" asp-controller="Home">Price</a>
+                     <li> <a asp-action="FAQ" asp-controller="Home">FAQ</a>
+                   <li> <a asp-action="Privacy" asp-controller="Home">Privacy Policy</a>
+                    <li> <a asp-action="Error" asp-controller="Home">404</a>
                   </ul>
                 </li>
-                <li> <a href="it_shop.html">Shop</a>
+                 <li> <a asp-action="Shop" asp-controller="Shop">Shop</a>
                   <ul>
                     <li><a href="it_shop.html">Shop List</a></li>
-                    <li><a href="it_shop_detail.html">Shop Detail</a></li>
+                    <li> <a asp-action="ShopDetail" asp-controller="Home">Shop Details</a>
                     <li><a href="it_cart.html">Shopping Cart</a></li>
                     <li><a href="it_checkout.html">Checkout</a></li>
                   </ul>
@@ -135,6 +138,7 @@
                 <li><a href="#" data-toggle="modal" data-target="#search_bar"><i class="fa fa-search" aria-hidden="true"></i></a></li>
               </ul>
             </div>
+            <partial name="_LoginPartial"/>
           </div>
           <!-- menu end -->
         </div>
@@ -182,12 +186,11 @@
       <div class="col-lg-6 col-md-6 col-sm-12 about_cont_blog">
         <div class="full text_align_left">
           <h3>What we do</h3>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-            standard dummy text ever since the 1500s, when an unknown printer took a galley..</p>
+          <p>We provide specific solutions for our every customers.Without a doubt we are the leading company in this sphere...</p>
           <ul>
-            <li><i class="fa fa-check-circle"></i>Persius appetere pro mea harum ridens</li>
-            <li><i class="fa fa-check-circle"></i>Instructior vis at causae legimus luptatum mel</li>
-            <li><i class="fa fa-check-circle"></i>Maluisset id persius appetere pro mea harum</li>
+            <li><i class="fa fa-check-circle"></i>Data recovery software can locate and restore emails</li>
+            <li><i class="fa fa-check-circle"></i>Our expert team is back up to strength and is continually gaining in experience and effectiveness</li>
+            <li><i class="fa fa-check-circle"></i>Our experts have been featured in press numerous times</li>
           </ul>
         </div>
       </div>
@@ -201,54 +204,46 @@
           <div class="accordion border_circle">
             <div class="bs-example">
               <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <p class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><i class="fa fa-bar-chart" aria-hidden="true"></i> Complete Recovery from Local & External Drive<i class="fa fa-angle-down"></i></a> </p>
-                  </div>
-                  <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                      <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it 
-                        over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, 
-                        consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</p>
+                 <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <p class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><i class="fa fa-bar-chart" aria-hidden="true"></i> Complete Recovery from Local & External Drive<i class="fa fa-angle-down"></i></a> </p>
+                      </div>
+                      <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <p>Leverage cloud services and local back-up, like a USB flash drive or external hard drive. </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
                 <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <p class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-plane"></i> Recovery Photo, Image, Video and Audio<i class="fa fa-angle-down"></i></a> </p>
-                  </div>
-                  <div id="collapseTwo" class="panel-collapse collapse">
-                    <div class="panel-body">
-                      <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it 
-                        over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, 
-                        consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</p>
+                      <div class="panel-heading">
+                        <p class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-plane"></i> Recovery Photo, Image, Video and Audio<i class="fa fa-angle-down"></i></a> </p>
+                      </div>
+                      <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <p>Only one drive can be scanned at once and, in addition to the local hard disk, iBeesoft Data Recovery is capable of scanning external devices, like digital cameras, memory cards or MP3 players. </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
                 <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <p class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><i class="fa fa-star"></i> Mobile Phone Recovery<i class="fa fa-angle-down"></i></a> </p>
-                  </div>
-                  <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                      <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it 
-                        over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, 
-                        consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</p>
+                      <div class="panel-heading">
+                        <p class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><i class="fa fa-star"></i> Mobile Phone Recovery<i class="fa fa-angle-down"></i></a> </p>
+                      </div>
+                      <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <p>Mobile phone data recovery software is useful program to recover deleted data from various kinds of mobile phone. </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
                 <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <p class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><i class="fa fa-bar-chart" aria-hidden="true"></i> Complete Recovery from Local & External Drive<i class="fa fa-angle-down"></i></a> </p>
-                  </div>
-                  <div id="collapseFour" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                      <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it 
-                        over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, 
-                        consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</p>
+                      <div class="panel-heading">
+                        <p class="panel-title"> <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><i class="fa fa-bar-chart" aria-hidden="true"></i> Complete Recovery from Local & External Drive<i class="fa fa-angle-down"></i></a> </p>
+                      </div>
+                      <div id="collapseFour" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                          <p>This data recovery software rescues files from internal and external hard drives, memory cards, and other common storage appliances. </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -257,8 +252,7 @@
       <div class="col-md-4">
         <div class="full" style="margin-top: 35px;">
           <h3>Need file recovery?</h3>
-          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et 
-            quasi architecto beatae vitae dicta sunt explicabo..</p>
+          <p>As much space as you need, unlimited file recovery, file access control, priority technical support, 14 days trial for free..</p>
           <p><a class="btn main_bt" href="#">Read More</a></p>
         </div>
       </div>
@@ -287,7 +281,7 @@
               <div class="service_blog_inner2">
                 <div class="icon text_align_left"><i class="fa fa-wrench"></i></div>
                 <h4 class="service-heading">Honest Services</h4>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusa ntium dolore mque.</p>
+                <p>And you can only do that by delivering honest services and creating trustworthy content.</p>
               </div>
             </div>
           </div>
@@ -296,7 +290,7 @@
               <div class="service_blog_inner2">
                 <div class="icon text_align_left"><i class="fa fa-cog"></i></div>
                 <h4 class="service-heading">Secure payments</h4>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusa ntium dolore mque.</p>
+                <p>Fast, easy and secure payments worldwide.</p>
               </div>
             </div>
           </div>
@@ -305,7 +299,7 @@
               <div class="service_blog_inner2">
                 <div class="icon text_align_left"><i class="fa fa-history"></i></div>
                 <h4 class="service-heading">Expert team</h4>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusa ntium dolore mque.</p>
+                <p>Our expert team is back up to strength and is continually gaining in experience and effectiveness.</p>
               </div>
             </div>
           </div>
@@ -314,7 +308,7 @@
               <div class="service_blog_inner2">
                 <div class="icon text_align_left"><i class="fa fa-heart-o"></i></div>
                 <h4 class="service-heading">Affordable services</h4>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusa ntium dolore mque.</p>
+                <p>We want offer people technologically advanced but simplified and affordable services.</p>
               </div>
             </div>
           </div>
