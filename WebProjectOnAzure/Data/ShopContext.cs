@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+
 namespace WebProjectOnAzure.Data
 {
     public class ShopContext : DbContext
@@ -12,12 +13,13 @@ namespace WebProjectOnAzure.Data
         }
         public ShopContext(DbContextOptions<ShopContext> options) : base(options)
         {
+           
         }
-        public DbSet<Product>? Products { get; set; }
-        public DbSet<Category>? Categories { get; set; }
-        public DbSet<Cart>? Carts { get; set; }
-        public DbSet<Order>? Orders { get; set; }
-        public DbSet<OrderDetail>? OrderDetails { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -28,19 +30,26 @@ namespace WebProjectOnAzure.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-            //modelBuilder.Entity<Product>().Property(i => i.ProductPrice).HasColumnType("decimal(18,4)"); ;
-            //modelBuilder.Entity<Order>().Property(i => i.Total).HasColumnType("decimal(18,4)");
-            //modelBuilder.Entity<OrderDetail>().Property(i => i.UnitPrice).HasColumnType("decimal(18,4)");
+            var converter = new ValueConverter<decimal, double>(
+    v => (double)v,
+    v => (decimal)v);
+            modelBuilder
+    .Entity<Product>()
+    .Property(e => e.Price)
+    .HasConversion(converter);
+            modelBuilder
+    .Entity<OrderDetail>()
+    .Property(e => e.UnitPrice)
+    .HasConversion(converter);
+            modelBuilder
+    .Entity<Order>()
+    .Property(e => e.Total)
+    .HasConversion(converter);
 
-            //modelBuilder.Entity<Cart>().HasOne<Product>(e => e.Product).WithMany(g => g.Cart).HasForeignKey(s => s.ID);
-            //modelBuilder.Entity<OrderDetail>()
-            //    .HasKey(c => new { c.ID, c.OrderId });
-
-       //     modelBuilder.Entity<Product>()
-       //.HasOne<Category>(e => e.Category)
-       //.WithMany(g => g.Product)
-       //.HasForeignKey(s => s.CategoryID);
+            modelBuilder.Entity<Product>()
+       .HasOne<Category>(e => e.Category)
+       .WithMany(g => g.Product)
+       .HasForeignKey(s => s.CategoryID);
 
 
         }

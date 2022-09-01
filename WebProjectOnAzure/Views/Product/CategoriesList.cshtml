@@ -1,9 +1,4 @@
-﻿@model IEnumerable<WebProjectOnAzure.Models.ITShop>
-@{
-    ViewData["Title"] = "Shop";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
+﻿@model IEnumerable<WebProjectOnAzure.Models.Category>
 <body id="default_theme" class="it_service">
 <!-- loader -->
 <div class="bg_load"> <img class="loader_animation" src="~/images/loaders/loader_1.png" alt="#" /> </div>
@@ -58,44 +53,40 @@
           <div class="menu_side">
             <div id="navbar_menu">
               <ul class="first-ul">
+                 
                   <li> <a asp-action="ShopIndex" asp-controller="Shop">IndexShop</a>
-                <li> <a asp-action="Home" asp-controller="Home">Home</a>
-                  <ul>
-                    <li> <a asp-action="Home" asp-controller="Home">Home</a>
-                     
-                  </ul>
-                </li>
-                 <li><a asp-action="Chat" asp-controller="Home">Chat</a></li>
+                      <ul>
+                        <li> <a asp-action="Create" asp-controller="Categories">Create Category</a>
+                            <li> <a asp-action="Create" asp-controller="Products">Create Products</a>
+                                @*<li> <a asp-action="Shop" asp-controller="Products">Shop</a>
+                                <li> <a asp-action="Index" asp-controller="ShoppingCart">Cart</a>*@
+                      </ul>
+                      </li>          
                <li> <a asp-action="About" asp-controller="Home">About us</a>
                 <li> <a asp-action="Service" asp-controller="Home">Service</a>
-                  <ul>
-                    <li> <a asp-action="ServiceList" asp-controller="Home">Service List</a>
+                  <ul>                   
                     <li> <a asp-action="ServiceDetail" asp-controller="Home">Service Details</a>
                   </ul>
                 </li>
                 <li> <a asp-action="Blog" asp-controller="Home">Blog</a>
-                  <ul>
-                    <li> <a asp-action="Blog" asp-controller="Home">Blog List</a>
+                  <ul>                   
                     <li> <a asp-action="BlogGrid" asp-controller="Home">Blog Grid</a>
                     <li> <a asp-action="BlogDetail" asp-controller="Home">Blog Detail</a>
                   </ul>
                 </li>
                 <li> <a href="#">Pages</a>
-                  <ul>
-                     <li> <a asp-action="Career" asp-controller="Home">Career</a>
-                         <li> <a asp-action="Shop" asp-controller="Shop">Shop</a>
+                  <ul>                             
                     <li> <a asp-action="Price" asp-controller="Home">Price</a>
                      <li> <a asp-action="FAQ" asp-controller="Home">FAQ</a>
                    <li> <a asp-action="Privacy" asp-controller="Home">Privacy Policy</a>
                     <li> <a asp-action="Error" asp-controller="Home">404</a>
                   </ul>
                 </li>
-                <li> <a asp-action="Shop" asp-controller="Home">Shop</a>
-                  <ul>
-                    <li><a href="it_shop.html">Shop List</a></li>
-                    <li> <a asp-action="ShopDetail" asp-controller="Home">Shop Details</a>
+                 <li> <a asp-action="Shop" asp-controller="Shop">Shop</a>
+                  <ul>                   
                     <li> <a asp-action="ShopDetail" asp-controller="Shop">Shop Details</a>
-                    <li><a href="it_checkout.html">Checkout</a></li>
+                    <li> <a asp-action="ShoppingCart" asp-controller="Shop">Shopping</a>
+                    <li> <a asp-action="CheckOut" asp-controller="home">CheckOut</a>
                   </ul>
                 </li>
                 <li> <a href="it_contact.html">Contact</a>
@@ -118,8 +109,6 @@
       </div>
     </div>
   </div>
-  
-</body>
   <!-- header bottom end -->
 </header>
 <div class="section padding_layout_1">
@@ -128,27 +117,28 @@
       <div class="col-md-12">
         <div class="full">
           <div class="main_heading text_align_center">
-            <h2>Our Products</h2>
-            <p class="large">We package the products with best services to make you a happy customer.</p>
+            <h2>Categories</h2>
+            <p class="large">Here you can chose what you want.</p>
           </div>
         </div>
       </div>
     </div>
-     
-    <div class="row">
-        @foreach(var item in Model){
+   <div class="row">
+        @foreach(var category in Model){
       <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 margin_bottom_30_all">
         <div class="product_list">
-          <div class="product_img"> <img class="img-responsive" src="@item.ITProductPhoto" alt=""> </div>
+          <div class="product_img"> <img class="img-responsive" src="@category.CategoryPhoto" alt=""> </div>
           <div class="product_detail_btm">
             <div class="center">
-              <h4><a href="/Shop/ShopDetail/@item.Id">@item.Brand @item.Model</a></h4>
+              <li>@Html.ActionLink(category.CategoryName, 
+                "ProductShop", "Product", 
+                new { Category = category.CategoryName }, null)</li>
             </div>
             <div class="starratin">
               <div class="center"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </div>
             </div>
             <div class="product_price">
-              <p> <span class="new_price">@item.ITProductPrice$</span></p>
+              <p> <span class="new_price">@category.Description</span></p>
             </div>
 
           </div>
@@ -159,4 +149,4 @@
 
       }
       </div>
-      
+    </body>

@@ -25,7 +25,9 @@ namespace WebProjectOnAzure.Models
         [Required(ErrorMessage = "A Product Model is required")]
         [StringLength(160)]
         public string? ProductModel { get; set; }
-
+        [Required(ErrorMessage = "A Product Description is required")]
+        [StringLength(1000)]
+        public string? ProductDescription { get; set; }
         [Required(ErrorMessage = "Price is required")]
         [Range(0.01, 100000.00,
             ErrorMessage = "Price must be between 0.01 and 100000.00")]

@@ -93,10 +93,10 @@
                  
                   <li> <a asp-action="ShopIndex" asp-controller="Shop">IndexShop</a>
                       <ul>
-                        <li> <a asp-action="Create" asp-controller="Category">Create Category</a>
-                            <li> <a asp-action="Create" asp-controller="Products">Create Products</a>
-                                <li> <a asp-action="Shop" asp-controller="Products">Shop</a>
-                                <li> <a asp-action="Index" asp-controller="ShoppingCart">Cart</a>
+                        <li> <a asp-action="Create" asp-controller="Categories">Create Category</a>
+                            <li> <a asp-action="Create" asp-controller="Product">Create Products</a>
+                                @*<li> <a asp-action="Shop" asp-controller="Products">Shop</a>
+                                <li> <a asp-action="Index" asp-controller="ShoppingCart">Cart</a>*@
                       </ul>
                       </li>          
                <li> <a asp-action="About" asp-controller="Home">About us</a>
@@ -120,7 +120,8 @@
                   </ul>
                 </li>
                  <li> <a asp-action="Shop" asp-controller="Shop">Shop</a>
-                  <ul>                   
+                  <ul>
+                      <li> <a asp-action="CategoriesList" asp-controller="Product">Categories</a>
                     <li> <a asp-action="ShopDetail" asp-controller="Shop">Shop Details</a>
                     <li> <a asp-action="ShoppingCart" asp-controller="Shop">Shopping</a>
                     <li> <a asp-action="CheckOut" asp-controller="home">CheckOut</a>

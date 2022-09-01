@@ -28,7 +28,11 @@ builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireCo
         .AddEntityFrameworkStores<IdentityContext>();
 
 
-
+builder.Services.AddControllersWithViews()
+    .AddRazorOptions(options =>
+    {
+        options.ViewLocationFormats.Add("/{0}.cshtml");
+    });
 
 builder.Services.AddScoped<ITShopService>();
 

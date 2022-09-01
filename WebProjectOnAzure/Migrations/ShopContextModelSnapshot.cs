@@ -30,7 +30,7 @@ namespace WebProjectOnAzure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecordID"), 1L, 1);
 
-                    b.Property<string>("CartId")
+                    b.Property<string>("CartID")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Count")
@@ -39,12 +39,12 @@ namespace WebProjectOnAzure.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ID")
+                    b.Property<int>("ProductID")
                         .HasColumnType("int");
 
                     b.HasKey("RecordID");
 
-                    b.HasIndex("ID");
+                    b.HasIndex("ProductID");
 
                     b.ToTable("Carts");
                 });
@@ -60,6 +60,12 @@ namespace WebProjectOnAzure.Migrations
                     b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CategoryPhoto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("CategoryID");
 
                     b.ToTable("Categories");
@@ -67,76 +73,93 @@ namespace WebProjectOnAzure.Migrations
 
             modelBuilder.Entity("WebProjectOnAzure.Models.Order", b =>
                 {
-                    b.Property<int>("OrderId")
+                    b.Property<int>("OrderID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderID"), 1L, 1);
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(70)
+                        .HasColumnType("nvarchar(70)");
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(160)
+                        .HasColumnType("nvarchar(160)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(160)
+                        .HasColumnType("nvarchar(160)");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("nvarchar(24)");
 
                     b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
-                    b.Property<decimal?>("Total")
-                        .HasColumnType("decimal(18,4)");
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("OrderId");
+                    b.HasKey("OrderID");
 
                     b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("WebProjectOnAzure.Models.OrderDetail", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("OrderDetailID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailID"), 1L, 1);
+
+                    b.Property<int>("OrderID")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderDetailId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductID")
+                    b.Property<int>("ProductID")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("UnitPrice")
-                        .HasColumnType("decimal(18,4)");
+                    b.Property<double>("UnitPrice")
+                        .HasColumnType("float");
 
-                    b.HasKey("ID", "OrderId");
+                    b.HasKey("OrderDetailID");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("OrderID");
 
                     b.HasIndex("ProductID");
 
@@ -145,36 +168,38 @@ namespace WebProjectOnAzure.Migrations
 
             modelBuilder.Entity("WebProjectOnAzure.Models.Product", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("ProductID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"), 1L, 1);
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
                     b.Property<string>("ProductBrand")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(160)
+                        .HasColumnType("nvarchar(160)");
 
                     b.Property<string>("ProductDescription")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("ProductImage")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductModel")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(160)
+                        .HasColumnType("nvarchar(160)");
 
-                    b.Property<string>("ProductPhoto")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("ProductPrice")
-                        .IsRequired()
-                        .HasColumnType("decimal(18,4)");
-
-                    b.HasKey("ID");
+                    b.HasKey("ProductID");
 
                     b.HasIndex("CategoryID");
 
@@ -184,8 +209,8 @@ namespace WebProjectOnAzure.Migrations
             modelBuilder.Entity("WebProjectOnAzure.Models.Cart", b =>
                 {
                     b.HasOne("WebProjectOnAzure.Models.Product", "Product")
-                        .WithMany("Cart")
-                        .HasForeignKey("ID")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -196,13 +221,15 @@ namespace WebProjectOnAzure.Migrations
                 {
                     b.HasOne("WebProjectOnAzure.Models.Order", "Order")
                         .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId")
+                        .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WebProjectOnAzure.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductID");
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Order");
 
@@ -232,7 +259,7 @@ namespace WebProjectOnAzure.Migrations
 
             modelBuilder.Entity("WebProjectOnAzure.Models.Product", b =>
                 {
-                    b.Navigation("Cart");
+                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }
