@@ -5,7 +5,7 @@ using System.Net;
 using WebProjectOnAzure.Data;
 using WebProjectOnAzure.Models;
 using WebProjectOnAzure.Helpers;
-using WebProjectOnAzure.ViewModel;
+using WebProjectOnAzure.ViewForModel;
 
 namespace WebProjectOnAzure.Controllers
 {

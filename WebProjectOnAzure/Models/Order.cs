@@ -61,6 +61,21 @@ namespace WebProjectOnAzure.Models
         [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
 
+        [Required(ErrorMessage = "Card Number is required")]
+        [DisplayName("Card Number")]
+        public int CardNumber { get; set; }
+        [Required(ErrorMessage = "Expiration Date is required")]
+        [StringLength(9)]
+        [DisplayName("Expiration Date")]
+        public string? ExpirationDate { get; set; }
+        
+        [Required(ErrorMessage = "CVCode must contain 3 integers")]
+        [DisplayName("CVCode")]
+
+        public int CVCode { get; set; }
+
+        
+        public string? CouponCode { get; set; }        
         [ScaffoldColumn(false)]
         public decimal Total { get; set; }
 

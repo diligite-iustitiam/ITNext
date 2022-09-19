@@ -1,4 +1,4 @@
-﻿namespace WebProjectOnAzure.ViewModel
+﻿namespace WebProjectOnAzure.ViewForModel
 {
     public class ShoppingCartRemoveViewModel
     {

@@ -41,6 +41,10 @@ namespace WebProjectOnAzure.Migrations
                     Country = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(24)", maxLength: 24, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CardNumber = table.Column<int>(type: "int", nullable: false),
+                    ExpirationDate = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
+                    CVCode = table.Column<int>(type: "int", nullable: false),
+                    CouponCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Total = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>

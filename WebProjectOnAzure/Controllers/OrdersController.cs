@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using WebProjectOnAzure.Data;
 using WebProjectOnAzure.Models;
 using WebProjectOnAzure.Helpers;
+using Stripe;
 
 namespace WebProjectOnAzure.Controllers
 {
@@ -19,15 +20,12 @@ namespace WebProjectOnAzure.Controllers
         {
             _context = context;
         }
-        public IActionResult CheckList()
+        public IActionResult Confirmed()
         {
             var cart = SessionHelper.GetObjectFromJson<List<Cart>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
-            ViewBag.DollarAmount = cart.Sum(item => item.Product.Price * item.Count);
-            ViewBag.total = Math.Round(ViewBag.DollarAmount, 2) * 100;
-            ViewBag.total = Convert.ToInt64(ViewBag.total);
-            long total = ViewBag.total;
-            TotalAmount = total.ToString();
+            ViewBag.total = cart.Sum(item => item.Product.Price * item.Count);
+            ViewBag.total = Math.Round(ViewBag.total, 2);
             return View();
         }
         // GET: Orders
@@ -57,38 +55,33 @@ namespace WebProjectOnAzure.Controllers
         }
 
         // GET: Orders/Create
+        
         public IActionResult CheckOut()
         {
-
             var cart = SessionHelper.GetObjectFromJson<List<Cart>>(HttpContext.Session, "cart");
             ViewBag.cart = cart;
             ViewBag.total = cart.Sum(item => item.Product.Price * item.Count);
             ViewBag.total = Math.Round(ViewBag.total, 2);
 
             return View();
-            
         }
-        
-
-        // POST: Orders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
-        
-        public async Task<IActionResult> CheckOut([Bind("FirstName,LastName,Address,City,State,PostalCode,Country,Phone,Email")] Order order)
+        public async Task<IActionResult> CheckOut([Bind("FirstName,LastName,Address,City,State,PostalCode,Country,Phone,Email,CardNumber,ExpirationDate,CVCode,CouponCode")]Order order)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(order);                
+                _context.Add(order);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(CheckList));
+                return RedirectToAction(nameof(Confirmed));
             }
             return View(order);
         }
+        [HttpPost]
+        
 
-        // GET: Orders/Edit/5
+
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Orders == null)

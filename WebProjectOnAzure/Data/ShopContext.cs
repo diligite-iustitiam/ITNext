@@ -50,7 +50,7 @@ namespace WebProjectOnAzure.Data
        .HasOne<Category>(e => e.Category)
        .WithMany(g => g.Product)
        .HasForeignKey(s => s.CategoryID);
-
+            
 
         }
     }

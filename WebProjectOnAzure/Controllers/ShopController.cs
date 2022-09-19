@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Session;
 
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace WebProjectOnAzure.Controllers
 {

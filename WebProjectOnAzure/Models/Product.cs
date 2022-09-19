@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -38,7 +39,10 @@ namespace WebProjectOnAzure.Models
         public string? ProductImage { get; set; }
 
         public virtual Category? Category { get; set; }
-        
+
+        [NotMapped]
+        public virtual List<int>? PictureIDs { get; set; }
         public virtual List<OrderDetail>? OrderDetails { get; set; }
+        
     }
 }

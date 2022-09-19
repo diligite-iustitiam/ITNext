@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Purchase made";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="text-center">
+        <h1>Congratulations</h1>
+        <h4>You have made purchase on @ViewBag.total$</h4>
+        <a asp-controller="Product" asp-action="ProductShop">Back to Shop</a>
+    </div>

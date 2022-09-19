@@ -1,5 +1,5 @@
 ﻿using WebProjectOnAzure.Models;
-namespace WebProjectOnAzure.ViewModel
+namespace WebProjectOnAzure.ViewForModel
 {
     public class ShoppingCartViewModel
     {

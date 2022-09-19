@@ -90,11 +90,12 @@
           <div class="menu_side">
             <div id="navbar_menu">
               <ul class="first-ul">
-                 
+                <li> <a asp-action="ProductByBrand" asp-controller="Product">AjaxIndex</a>
                   <li> <a asp-action="ShopIndex" asp-controller="Shop">IndexShop</a>
                       <ul>
                         <li> <a asp-action="Create" asp-controller="Categories">Create Category</a>
                             <li> <a asp-action="Create" asp-controller="Product">Create Products</a>
+                                <li> <a asp-action="Create" asp-controller="Orders">order</a>
                                 @*<li> <a asp-action="Shop" asp-controller="Products">Shop</a>
                                 <li> <a asp-action="Index" asp-controller="ShoppingCart">Cart</a>*@
                       </ul>

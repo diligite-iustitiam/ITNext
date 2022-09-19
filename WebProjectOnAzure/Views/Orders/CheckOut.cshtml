@@ -189,14 +189,15 @@
           </div>
         </div>
       </div>
-    </div>   
+    </div> 
+     <form asp-action="CheckOut">
     <div class="row">
         <div class="col-md-8">
         <div class="checkout-form">
             <fieldset>
      <div class="row">
     <div class="col-md-4">
-        <form asp-action="CheckOut">
+       
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
@@ -245,10 +246,8 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Confirm" class="btn btn-primary" />
-            </div>
-        </form>
+           
+       
     </div>
 </div>
 </fieldset>
@@ -270,7 +269,7 @@
             
         </tr>
                 
-                @foreach (Cart item in ViewBag.cart)
+                @foreach (var item in ViewBag.cart)
         {
             <tr>
                 <td>@item.Product.ProductBrand</td>
@@ -304,44 +303,47 @@
                 </div>
               </div>
               <div class="panel-body">
-                <form id="payment-form" method="POST" action="index.html">
+                
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-field">
                         <label>Card Number</label>
-                        <div class="form-field cardNumber">
-                          <input name="cardNumber" placeholder="Valid Card Number" required="" type="tel">
-                          <span class="input-group-addon"><i class="fa fa-credit-card"></i></span> </div>
+                        <label asp-for="CardNumber" class="control-label"></label>
+                <input asp-for="CardNumber" class="form-control" />
+                <span asp-validation-for="CardNumber" class="input-group-addon"></span>                         
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-xs-12 col-md-7">
                       <div class="form-field">
-                        <label><span class="hidden-xs">Expiration</span><span class="visible-xs-inline">EXP</span> Date</label>
-                        <input name="cardExpiry" placeholder="MM / YY" required="" type="tel">
+                        <label asp-for="ExpirationDate" class="control-label"></label>
+                <input asp-for="ExpirationDate" class="form-control" />
+                <span asp-validation-for="ExpirationDate" class="text-danger"></span>
                       </div>
                     </div>
                     <div class="col-xs-12 col-md-5 pull-right">
                       <div class="form-field">
-                        <label>CV Code</label>
-                        <input name="cardCVC" placeholder="CVC" required="" type="tel">
+                        <label asp-for="CVCode" class="control-label"></label>
+                <input asp-for="CVCode" class="form-control" />
+                <span asp-validation-for="CVCode" class="text-danger"></span>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-field">
-                        <label>Coupon Code</label>
-                        <input name="couponCode" required="" type="text">
+                         <label asp-for="CouponCode" class="control-label"></label>
+                <input asp-for="CouponCode" class="form-control" />
+                <span asp-validation-for="CouponCode" class="text-danger"></span>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12 payment-bt">
-                      <div class="center">
-                        <button class="bt_main">Start Subscription</button>
-                      </div>
+                      <div class="form-group">
+                <input type="submit" value="Confirm" class="btn btn-primary" />
+            </div>
                     </div>
                   </div>
                 </form>

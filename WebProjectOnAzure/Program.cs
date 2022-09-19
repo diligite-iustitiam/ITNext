@@ -22,7 +22,7 @@ builder.Services.AddDbContext<IdentityContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDbContext<ShopContext>(options =>
     options.UseSqlServer(shopconnection));
-builder.Services.AddSession();
+
 
 builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
         .AddEntityFrameworkStores<IdentityContext>();
@@ -98,5 +98,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
-app.UseSession();
+
 app.Run();
