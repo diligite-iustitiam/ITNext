@@ -28,6 +28,10 @@ namespace WebProjectOnAzure.Controllers
             List<ITShop> tShops = _shopService.Get().ToList();
             return View(tShops);
         }
+        public IActionResult AdminIndex()
+        {
+            return View();
+        }
         public IActionResult Service()
         {
 

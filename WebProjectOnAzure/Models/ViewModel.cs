@@ -1,5 +1,5 @@
 ﻿
-using WebProjectOnAzure.ViewForModel;
+using WebProjectOnAzure.ViewModels;
 
 namespace WebProjectOnAzure.Models
 {

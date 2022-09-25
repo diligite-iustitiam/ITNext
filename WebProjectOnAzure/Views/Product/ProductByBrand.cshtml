@@ -1,22 +1,15 @@
 ﻿@model ShopViewModels.ShopModel
-@using WebProjectOnAzure.ViewForModel
+@using WebProjectOnAzure.ViewModels
 @using WebProjectOnAzure.Data
 
 @{
-    Pager pager = new Pager();
-    List<Product> data = new List<Product>();
-    int PageNo = 0;
-    if(ViewBag.Pager != null)
-    {
-        pager = ViewBag.Pager;
-        PageNo = pager.CurrentPage;
-        data = ViewBag.Data;
-
-    }
+    
 }
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    
+  
     <link rel="stylesheet" href="~/css/search.css" />
 </head>
 <body id="default_theme" class="it_service">
@@ -154,51 +147,14 @@
         </div>
       </div>
     </div>
-    
-    
-       
-    <div class="col-md-4">   
-        <div class="full" style="margin-top: 35px;">
-            <h4 class="my-4 text-danger text-center">Add Filter</h4>
-            <div class="list-group">
-                <form role="search" method="get" class="form-inline list-group-item border-0" action="@Url.Action("ProductByBrand","Product",new{shopstyle = Model.ShopStyle})">
-                    <label class="pb-1 mb-1">
-                        <input type="search" class="form-control mr-sm-2" placeholder="Search.." value="@Model.SearchTerm" name="searchTerm"/>
-                    </label>
-                     <input type="submit" class="btn btn-outline-success form-control-sm my-2 my-sm-0" value="Search" id="actionButton" />
-                </form>
-                <div class="container-fluid list-group-item border-0">
-                    <p class="text-black-50 fw-bold text-start">Featured Categories</p>
-                    <div id="categoryArea" >
-                            @foreach(var category in Model.Categories)
-                            {
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="@category.CategoryID" id="item_@category.CategoryID" @(Model.CategoryCheckIds.Contains(category.CategoryID)? "checked" : "") onclick="SaveItems()">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        @category.CategoryName
-                                    </label>                             
-                            
-                        </div>
-                        }
-                </div>
-                
-            </div>
-           
-
-      </div>
-
-      
-        
-        
-       
-            </div>
-        </div>
-      
      
-</div>     
+</div> 
+
   <div id="productsDiv">
         @{
-            var filterviewmodel = new WebProjectOnAzure.ViewForModel.ShopViewModels.FilterViewModel();
+            var filterviewmodel = new WebProjectOnAzure.ViewModels.ShopViewModels.FilterViewModel();
+            filterviewmodel.Categories = Model.Categories;
+            filterviewmodel.Pager = Model.Pager;
             filterviewmodel.CategoryID = Model.CategoryID;
             filterviewmodel.Products = Model.Products;
             filterviewmodel.SortBy = Model.SortBy;
@@ -216,53 +172,15 @@
    
       </div> 
       
-
-      <script src="~/js/pagination.js"></script>
-     
-      <script>         
-var SaveItems = function() {
-    var ItemIdArray = [];
-    var ItemsIdsCommaSeparated = "";
-    $("#categoryArea input[type=checkbox]").each(function(index, val) {
-        var Id = $(val).attr("id");
-        var ischecked = $("#" + Id).is(":checked", true);
-        if (ischecked) {
-            var array = Id.split("_");
-            var ItemId = array[1];
-            ItemIdArray.push(ItemId);
-        }
-        ItemsIdsCommaSeparated = ItemIdArray.toString();
-
-
-    })
-    if (ItemIdArray.length != 0) {
-        $.ajax({
-            type: 'post',
-            url: '@Url.Action("FilterForProduct", "Product")',
-            data: {
-                ItemIds: ItemsIdsCommaSeparated,
-                shopstyle: '@Model.ShopStyle',
-                sortBy: '@Model.SortBy'
-            }
-
-        })
-            .done(function(response) {
-                console.log("done");
-                $("#productsDiv").html(response);
-            })
-            .fail(function(XMLHttpRequest, textStatus, errorThrown) {
-                console.log("fail");
-                alert("FAIL");
-            })
-            .always(function() {
-                console.log("always");
-
-            });
-        console.log("getdata out");
-    }
-}
-
-      </script>
-     
       
-       
+     
+     
+     
+ 
+
+ 
+
+        
+
+        
+ 

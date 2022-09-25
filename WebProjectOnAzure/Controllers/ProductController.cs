@@ -8,15 +8,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebProjectOnAzure.Data;
 using WebProjectOnAzure.Models;
-using WebProjectOnAzure.ViewForModel;
-using static WebProjectOnAzure.ViewForModel.ShopViewModels;
+using WebProjectOnAzure.ViewModels;
+using static WebProjectOnAzure.ViewModels.ShopViewModels;
 
 namespace WebProjectOnAzure.Controllers
 {
     public class ProductController : Controller
     {
         private readonly ShopContext _context;
-        int pageNo = 1;
+        
         public ProductController(ShopContext context)
         {
             _context = context;
@@ -77,56 +77,50 @@ namespace WebProjectOnAzure.Controllers
             return View(shop);
 
         }
-        
-        public async Task<IActionResult> ProductByBrand(string searchTerm,int? minimumPrice,int? maximumPrice,int? categoryID,int? sortBy,int pageNo,int? shopstyle,string ItemIds,int pg = 1)
-        {
-            const int pageSize = 12;
 
-            List<int> pictureIDs = !string.IsNullOrEmpty(ItemIds) ? ItemIds.Split(',').Select(x => int.Parse(x)).ToList() : new List<int>();
+        public async Task<IActionResult> ProductByBrand(string searchTerm, int? minimumPrice, int? maximumPrice,int? categoryID, int? sortBy, int? pageNo, int? shopstyle, string ItemIds)
+        {
+            int pageSize = 6;
            
+            List<int> pictureIDs = !string.IsNullOrEmpty(ItemIds) ? ItemIds.Split(',').Select(x => int.Parse(x)).ToList() : new List<int>();
+
             ShopModel model = new();
             model.SearchTerm = searchTerm;
             model.CategoryID = categoryID;
             model.SortBy = sortBy;
-            model.Categories = await _context.Categories.ToListAsync();           
+            pageNo = pageNo.HasValue ? shopstyle.Value > 0 ? pageNo.Value : 1 : 1;
+            model.Categories = await _context.Categories.ToListAsync();
             model.ShopStyle = shopstyle.HasValue ? shopstyle.Value > 0 ? shopstyle.Value : 1 : 1;
             model.MaximumPrice = maximumPrice.HasValue ? maximumPrice.Value > 0 ? maximumPrice.Value : ((int)_context.Products.Max(x => x.Price)) : ((int)_context.Products.Max(x => x.Price));
             model.MinPrice = minimumPrice.HasValue ? minimumPrice.Value > 0 ? minimumPrice.Value : 0 : 0;
             model.InitialMaximumPrice = (int)_context.Products.Max(x => x.Price);
-            pageNo = pg;
             model.CategoryCheckIds = pictureIDs;
             int totalCount = await SearchProductsCount(searchTerm, minimumPrice, maximumPrice, categoryID, sortBy, pictureIDs);
-            model.Products = await SearchProducts(searchTerm, minimumPrice, maximumPrice, categoryID, sortBy, pageNo, pageSize,pictureIDs);
-            if (pg < 1)
-                pg = 1;
-            int recsCount = model.Products.Count;
-            var pager = new Pager(recsCount, pg, pageSize);
-            int recsSkip = (pg - 1) * pageSize;
-            var data = model.Products.Skip(recsSkip).Take(pager.PageSize).ToList();
-            this.ViewBag.Pager = pager;
-            ViewBag.Data = data;
+            model.Products = await SearchProducts(searchTerm, minimumPrice, maximumPrice, categoryID, sortBy, pageNo.Value, pageSize, pictureIDs);
+            model.Pager = new Pager(totalCount, pageNo, pageSize);
             return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> FilterForProduct(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy, int? pageNo, int? shopstyle, string ItemIds)
         {
-            int pageSize = 12;
-            List<int> pictureIDs = !string.IsNullOrEmpty(ItemIds) ? ItemIds.Split(',').Select(x => int.Parse(x)).ToList() : new List<int>();
-           
+            int pageSize = 6;
+            List<int> pictureIDs = !string.IsNullOrEmpty(ItemIds) ? ItemIds.Split(',').Select(x => int.Parse(x)).ToList() : new List<int>();          
             FilterViewModel model = new();
             model.SearchTerm = searchTerm;
             model.CategoryID = categoryID;
             model.SortBy = sortBy;
+            model.ShopStyle = shopstyle.HasValue ? shopstyle.Value > 0 ? shopstyle.Value : 1 : 1;
+            pageNo = pageNo.HasValue ? shopstyle.Value > 0 ? pageNo.Value : 1 : 1;
             model.InitialMaximumPrice = (int)_context.Products.Max(x => x.Price);
             model.Categories = await _context.Categories.ToListAsync();
             model.MaximumPrice = maximumPrice.HasValue ? maximumPrice.Value > 0 ? maximumPrice.Value : ((int)_context.Products.Max(x => x.Price)) : ((int)_context.Products.Max(x => x.Price));
             model.MinPrice = minimumPrice.HasValue ? minimumPrice.Value > 0 ? minimumPrice.Value : 0 : 0;
-            model.ShopStyle = shopstyle.HasValue ? shopstyle.Value > 0 ? shopstyle.Value : 1 : 1;
-            pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
+            
+            
             model.CategoryCheckIds = pictureIDs;
             int totalCount = await SearchProductsCount(searchTerm, minimumPrice, maximumPrice, categoryID, sortBy, pictureIDs);
             model.Products = await SearchProducts(searchTerm, minimumPrice, maximumPrice, categoryID, sortBy, pageNo.Value, pageSize, pictureIDs);
-            
+            model.Pager = new Pager(totalCount, pageNo, pageSize);
             return PartialView(model);
 
         }
@@ -272,7 +266,7 @@ namespace WebProjectOnAzure.Controllers
             PriceLowToHigh = 3,
             PriceHighToLow = 4
         }
-        public async Task<List<Product>> SearchProducts(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy, int value, int pageSize, List<int> pictureIDs)
+        public async Task<List<Product>> SearchProducts(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy, int? pageNo, int pageSize, List<int> pictureIDs)
         {
             var products = await _context.Products.ToListAsync();
             
@@ -319,7 +313,7 @@ namespace WebProjectOnAzure.Controllers
 
 
             }
-            return products.Skip((pageNo - 1) * pageSize).Take(pageSize).ToList();
+            return products.Skip((int)((pageNo - 1) * pageSize)).Take(pageSize).ToList();
         }
         public async Task<int> SearchProductsCount(string searchTerm,int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy, List<int>? pictureIDs)
         {

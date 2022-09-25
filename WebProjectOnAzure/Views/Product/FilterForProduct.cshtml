@@ -1,4 +1,7 @@
-﻿@model WebProjectOnAzure.ViewForModel.ShopViewModels.FilterViewModel
+﻿@model WebProjectOnAzure.ViewModels.ShopViewModels.FilterViewModel
+
+
+
 <style>
     .filter-widget {
         margin-bottom: 45px;
@@ -60,6 +63,28 @@
 </style>
  <div class="col-md-4">   
         <div class="full" style="margin-top: 35px;">
+            <h4 class="my-4 text-danger text-center">Add Filter</h4>
+            <div class="list-group">
+                <form role="search" method="get" class="form-inline list-group-item border-0">
+                    <label class="pb-1 mb-1">
+                        <input type="search" class="form-control mr-sm-2" placeholder="Search.." value="@Model.SearchTerm" name="searchTerm" id="searchTerm"/>
+                    </label>
+                     <input type="submit" class="btn btn-outline-success form-control-sm my-2 my-sm-0" value="Search" id="actionButton" />
+                </form>
+                  <div class="container-fluid list-group-item border-0">
+                    <p class="text-black-50 fw-bold text-start">Featured Categories</p>
+                    <div id="categoryArea" >
+                            @foreach(var category in Model.Categories)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="@category.CategoryID" id="item_@category.CategoryID" @(Model.CategoryCheckIds.Contains(category.CategoryID)? "checked" : "") onclick="SaveItems()">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        @category.CategoryName
+                                    </label>                             
+                            
+                        </div>
+                        }
+                </div>
      <div class="filter-widget">
                     <p class="text-black-50 font-weight-bold text-start">Price</p>
                     <div class="filter-range-wrap">
@@ -84,7 +109,9 @@
                 </div>
                 </div>
                 </div>
-  <div class="row">
+                </div>
+                </div>
+                <div class="row">
         @foreach(var item in Model.Products){
       <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 margin_bottom_30_all">
         <div class="product_list">
@@ -109,16 +136,270 @@
         
       </div>
   
-
       }
       </div>
+      
+@if (Model.Pager != null && Model.Pager.TotalPages > 1)
+{
+    <nav>
+        <ul class="pagination justify-content-end">
+            
+            @for (var pge = Model.Pager.StartPage; pge <= Model.Pager.EndPage; pge++)
+            {
+                string activeClass = Model.Pager.CurrentPage == pge ? "active bg-info" : string.Empty;
+                <li class="page-item @activeClass">
+                    <a data-href="@Url.Action("FilterForProduct", "Product", new{pageNo = pge, sortBy= Model.SortBy, categoryID = Model.CategoryID})" class="pageDataLink page-link">@pge</a></li>
+            }
+           
+        </ul>
+    </nav>
+    }
+     
+    <script>
+var rangeSlider = $(".price-range"),
+    minamount = $("#minamount"),
+    maxamount = $("#maxamount");
 
-      <script>
+$(document).ready(function() {
+    rangeSlider.slider({
+        range: true,
+        min: 0,
+        max: 15000,
+        values: [@Model.MinPrice, @Model.MaximumPrice],
+        slide: function(event, ui) {
+            var minVal = ui.values[0];
+            minamount.val(minVal + '$');
+            if (minVal > 0) {
+                $("[name=minimumPrice]").val(minVal);
+                $("[name=minimumPrice]").removeAttr("disabled");
+            } else {
+                $("[name=minimumPrice]").val("");
+                $("[name=minimumPrice]").attr("disabled", "disabled");
+            }
+            var maxVal = ui.values[1];
+            maxamount.val(maxVal + '$');
+            if (maxVal < @Model.MaximumPrice) {
+                $("[name=maximumPrice]").val(maxVal);
+                $("[name=maximumPrice]").removeAttr("disabled");
+            } else {
+                $("[name=maximumPrice]").val("");
+                $("[name=maximumPrice]").attr("disabled", "disabled");
+            }
+        }
+    });
+    minamount.val(rangeSlider.slider("values", 0) + '$');
+    maxamount.val(rangeSlider.slider("values", 1) + '$');
+});
+
+$("priceRangeForm").submit(function(e) {
+    var ItemIdArray = [];
+    var ItemsIdsCommaSeparated = "";
+    $("#categoryArea input[type=checkbox]").each(function(index, val) {
+        var Id = $(val).attr("id");
+        var ischecked = $("#" + Id).is(":checked", true);
+        if (ischecked) {
+            var array = Id.split("_");
+            var ItemId = array[1];
+            ItemIdArray.push(ItemId);
+        }
+        ItemsIdsCommaSeparated = ItemIdArray.toString();
+
+
+    })
+
+    Sendi(ItemsIdsCommaSeparated);
+    e.preventDefault();
+});
+
+    function Search() {
+        clearTimeout(searchTimeout);
+        var n = $("#searchURL").val();
+        n &&
+            (searchTimeout = setTimeout(function() {
+                var t = n,
+                    i = $("[name=minimumPrice]").val(""),
+                    r = $("[name=maximumPrice]").val(""),
+                    v = '@Model.ShopStyle';
+                i && (t = t + (t.includes("?") ? "&" : "?") + "minimumPrice" + i);
+                r && (t = t + (t.includes("?") ? "&" : "?") + "maximumPrice" + r);
+                v && (t = t + (t.includes("?") ? "&" : "?") + "shopstyle=" + v);
+window.location.href = t;
+            }, 100));
+    }
+function Sendi(ItemsIdsCommaSeparated) {
+     $.ajax({
+            type:"post",
+            url: '@Url.Action("FilterForProduct", "Product")',
+            data: {
+                ItemIds: ItemsIdsCommaSeparated,
+                minimumPrice: $("[name=minimumPrice]").val(),
+                maximumPrice: $("[name=maximumPrice]").val(),
+                shopstyle: '@Model.ShopStyle',
+                searchTerm: $("#searchTerm").val()
+                                         
+               
+            }
+
+        }).done(function(response) {              
+                $("#productsDiv").html(response);
+                window.location.href = "#productsDiv"
+        })
+}
+
+
+    </script>
+
+
+    <script>
+$("#actionButton").click(function(){ 
+    var ItemIdArray = [];
+    var ItemsIdsCommaSeparated = "";
+    $("#categoryArea input[type=checkbox]").each(function(index, val) {
+        var Id = $(val).attr("id");
+        var ischecked = $("#" + Id).is(":checked", true);
+        if (ischecked) {
+            var array = Id.split("_");
+            var ItemId = array[1];
+            ItemIdArray.push(ItemId);
+        }
+        ItemsIdsCommaSeparated = ItemIdArray.toString();
+
+
+    })
+    $.ajax({
+        url: '@Url.Action("FilterForProduct","Product")',
+        type: 'post',
+        data: {
+            ItemIds: ItemsIdsCommaSeparated,
+            shopstyle: '@Model.ShopStyle',
+            searchTerm: $("#searchTerm").val(),
+            minimumPrice: $("[name=minimumPrice]").val(),
+            maximumPrice: $("[name=maximumPrice]").val()
+        }
+        })
+        .done(function(response) {
+            $("#productsDiv").html(response);
+        });
+        
+    });
+   </script>
+
+   <script>         
+ 
+var SaveItems = function() {
+    var ItemIdArray = [];
+    var ItemsIdsCommaSeparated = "";
+    $("#categoryArea input[type=checkbox]").each(function(index, val) {
+        var Id = $(val).attr("id");
+        var ischecked = $("#" + Id).is(":checked", true);
+        if (ischecked) {
+            var array = Id.split("_");
+            var ItemId = array[1];
+            ItemIdArray.push(ItemId);
+        }
+        ItemsIdsCommaSeparated = ItemIdArray.toString();
+
+
+    })
+    if (ItemIdArray.length != 0) {
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("FilterForProduct", "Product")',
+            data: {
+                ItemIds: ItemsIdsCommaSeparated,
+                shopstyle: '@Model.ShopStyle',
+                sortBy: '@Model.SortBy',
+                searchTerm: $("#searchTerm").val(),
+                minimumPrice: $("[name=minimumPrice]").val(),
+                maximumPrice: $("[name=maximumPrice]").val()
+            }
+
+        })
+            .done(function(response) {
+                console.log("done");
+                $("#productsDiv").html(response);
+            })
+            .fail(function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("fail");
+                alert("FAIL");
+            })
+            .always(function() {
+                console.log("always");
+
+            });
+        console.log("getdata out");
+    }
+}
+    </script>
+    <script>
+    $(".pageDataLink").click(function() {
+    debugger;
+    var url = $(this).attr("data-href");
+
+    if (url != "" || url != undefined){
+    GetData(url);
+    }
+
+    });
+  </script>
+    <script>
+
+    function GetData(dUrl){
+        console.log("getdata in");
+         var ItemIdArray = [];
+    var ItemsIdsCommaSeparated = "";
+    $("#categoryArea input[type=checkbox]").each(function(index, val) {
+        var Id = $(val).attr("id");
+        var ischecked = $("#" + Id).is(":checked", true);
+        if (ischecked) {
+            var array = Id.split("_");
+            var ItemId = array[1];
+            ItemIdArray.push(ItemId);
+        }
+        ItemsIdsCommaSeparated = ItemIdArray.toString();
+
+
+    })
+    $.ajax({
+            type: 'post',
+            url: dUrl,
+            data: {
+                ItemIds: ItemsIdsCommaSeparated,
+                shopstyle: '@Model.ShopStyle',                
+                searchTerm: $("#searchTerm").val(),
+                minimumPrice: $("[name=minimumPrice]").val(),
+                maximumPrice: $("[name=maximumPrice]").val()
+            }
+
+        })
+        .done(function(response) {
+                console.log("done");
+                console.log(response)
+                $("#productsDiv").html(response);
+                window.location.href = "#productsDiv"
+            })
+            .fail(function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("fail");
+                alert("FAIL");
+            })
+            .always(function() {
+                console.log("always");
+
+            });
+        console.log("getdata out");
+    }
+    </script>
+
+
+
+
+     @* <script>
 var callTimeout;
-var priceSlider = $("#slide-range").slider({
+var priceSlider = $("#slide-range");
+priceSlider.slider({
     range:true,
     min:0,
-    max:@Model.MaximumPrice,
+    max:150000,
     values:[@Model.MinPrice, @Model.MaximumPrice],
     slide: function(event, ui) {
         var minPrice = ui.values[0];
@@ -131,86 +412,4 @@ var priceSlider = $("#slide-range").slider({
         callTimeout = setTimeout(PriceRangeChange, 500);
     }
 })
-        </script>
-
-
-      <script>
-var rangeSlider = $(".price-range"),
-    minamount = $("#minamount"),
-    maxamount = $("#maxamount");
-$(document).ready(function () {
-    rangeSlider.slider({
-        range: true,
-        min: 0,
-        max: @Model.InitialMaximumPrice,
-
-        values: [@Model.MinPrice, @Model.MaximumPrice],
-        slide: function(event, ui) {
-            var minVal = ui.values[0];
-            minamount.val(minVal + '$');
-            if (minVal > 0) {
-                $("[name=minimumPrice]").val(minVal);
-                $("[name=minimumPrice]").removeAttr("disabled");
-            }
-            else {
-                $("[name=minimumPrice]").val("");
-                $("[name=minimumPrice]").attr("disabled", "disabled");
-            }
-            var maxVal = ui.values[1];
-            maxamount.val(maxVal + '$');
-
-            if (maxVal < @Model.MaximumPrice) {
-                $("[name=maximumPrice]").val(maxVal);
-                $("[name=maximumPrice]").removeAttr("disabled");
-            }
-            else {
-                $("[name=maximumPrice]").val("");
-                $("[name=maximumPrice]").attr("disabled", "disabled");
-            }
-        }
-    });
-    minamount.val(rangeSlider.slider("values", 0) + '$');
-    maxamount.val(rangeSlider.slider("values", 1) + '$');
-});
-
-$("#priceRangeForm").submit(function(e) {
-    Sendi();
-    e.preventDefault();
-});
-
-function Sendi() {
-    $.ajax({
-        type: "post",
-        url: '@Url.Action("FilterForProduct","Product")',
-        data: {
-            minimumPrice: $("[name=minimumPrice]").val(),
-                maximumPrice: $("[name=maximumPrice]").val(),
-            shopstyle: '@Model.ShopStyle',
-            searchTerm: $("#searchTerm").val()
-        }
-    }).done(function(response) {
-        $("#productsDiv").html(response);
-        window.location.href = "#productsDiv"
-
-    })
-}
-      </script>
-
-       @* <script>
-    $("#actionButton").click(function() {
-        $.ajax({
-        url: '@Url.Action("FilterForProduct","Product")',
-        type: 'post',
-        data: {
-            shopstyle: '@Model.ShopStyle',
-            searchTerm: $("#searchTerm").val()
-        }
-        })
-        .done(function(response) {
-            $("#productsDiv").html(response);
-        });
-});
-      </script>*@
-
-        
- 
+        </script>*@

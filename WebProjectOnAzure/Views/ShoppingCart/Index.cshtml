@@ -205,8 +205,8 @@
                 <td class="text-right"><h4>@ViewBag.total</h4></td>
               </tr>             
               <tr>
-                <td><button type="button" class="button"><a href="/Product/CategoriesList/">Back to Shop</a></button></td>
-                <td><button class="button"><a asp-controller="Orders" asp-action="CheckOut" asp-route-id="">Go To Checkout</a></button></td>
+                <td><button type="button" class="button"><a asp-controller="Product" asp-action="ProductByBrand">Back to Shop</a></button></td>
+                <td><button class="button"><a asp-controller="Order" asp-action="CheckOut" asp-route-id="">Go To Checkout</a></button></td>
               </tr>
             </tbody>
           </table>

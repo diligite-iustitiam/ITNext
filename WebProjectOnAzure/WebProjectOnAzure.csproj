@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\DashBoard\**" />
+    <Content Remove="Areas\DashBoard\**" />
+    <EmbeddedResource Remove="Areas\DashBoard\**" />
+    <None Remove="Areas\DashBoard\**" />
+  </ItemGroup>
+
+  <ItemGroup>
 
 
 	  <PackageReference Include="Elmah.Io.Extensions.Logging" Version="4.1.28" />
@@ -43,7 +50,7 @@
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
-	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
+	  <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.9" />
     
     
    
@@ -52,6 +59,10 @@
     <PackageReference Include="Realm" Version="10.15.1" />
     <PackageReference Include="Stripe.net" Version="40.7.0" />
     <PackageReference Include="System.Runtime.Extensions" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Home\AdminIndex.cshtml" />
   </ItemGroup>
 	
 

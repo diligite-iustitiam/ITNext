@@ -90,15 +90,7 @@ namespace WebProjectOnAzure.Controllers
             }
             return View(shop);
         }
-        public ActionResult ShoppingCart()
-        {
-
-
-            return View();
-            
-        }
-        
-
+      
         // GET: Cars/Edit/5
         public IActionResult ProductEdit(string id)
         {
