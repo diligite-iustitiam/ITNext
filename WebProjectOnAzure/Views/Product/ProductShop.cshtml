@@ -1,19 +1,23 @@
-﻿@*@model WebProjectOnAzure.Models.Category*@
-@using System.Linq
-@using Microsoft.AspNetCore.Mvc.Rendering;
-@using Microsoft.AspNetCore.Mvc.Routing;
-@model ViewModel
-
-
-@using WebProjectOnAzure.Models
+﻿@model ShopViewModels.ShopModel
+@using WebProjectOnAzure.ViewModels
 @using WebProjectOnAzure.Data
+
 @{
-//    var itemlist = (from c in Model.ProductSelectList select c.ProductBrand).Distinct().OrderBy(x => x);
-  
+    
 }
-     
-<body id="default_theme" class="it_service">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    
+  
     <link rel="stylesheet" href="~/css/search.css" />
+</head>
+<body id="default_theme" class="it_service">
+    
+    
+    
+   
+
 <!-- loader -->
 <div class="bg_load"> <img class="loader_animation" src="~/images/loaders/loader_1.png" alt="#" /> </div>
 <!-- end loader -->
@@ -46,7 +50,7 @@
             </div>
           </div>
           <div class="float-right">
-            <div class="make_appo"> <a class="btn white_btn" href="make_appointment.html">Make Appointment</a> </div>
+             <div class="make_appo"> <a class="btn white_btn" asp-action="Appointment" asp-controller="Home">Make Appointment</a> </div>
           </div>
         </div>
       </div>
@@ -54,64 +58,44 @@
   </div>
   <!-- end header top -->
   <!-- header bottom -->
-  <div class="header_bottom">
+   <div class="header_bottom">
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
           <!-- logo start -->
-          <div class="logo"> <a href="it_home.html"><img src="~/images/logos/it_logo.png" alt="logo" /></a> </div>
+          <div class="logo"> <a asp-action="Index" asp-controller="Home"><img src="~/images/logos/it_logo.png" alt="logo" /></a> </div>
           <!-- logo end -->
         </div>
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
           <!-- menu start -->
           <div class="menu_side">
             <div id="navbar_menu">
-              <ul class="first-ul">
-                  <li> <a asp-action="ShopIndex" asp-controller="Shop">IndexShop</a>
-                <li> <a asp-action="Home" asp-controller="Home">Home</a>
-                  <ul>
-                    <li> <a asp-action="Home" asp-controller="Home">Home</a>
-                     
-                  </ul>
-                </li>
-                 <li><a asp-action="Chat" asp-controller="Home">Chat</a></li>
+              <ul class="first-ul">               
+                  <li> <a asp-action="AdminIndex" asp-controller="Home">Admin DashBoard</a>
                <li> <a asp-action="About" asp-controller="Home">About us</a>
                 <li> <a asp-action="Service" asp-controller="Home">Service</a>
-                  <ul>
-                    <li> <a asp-action="ServiceList" asp-controller="Home">Service List</a>
+                  <ul>                   
                     <li> <a asp-action="ServiceDetail" asp-controller="Home">Service Details</a>
                   </ul>
                 </li>
                 <li> <a asp-action="Blog" asp-controller="Home">Blog</a>
-                  <ul>
-                    <li> <a asp-action="Blog" asp-controller="Home">Blog List</a>
-                    <li> <a asp-action="BlogGrid" asp-controller="Home">Blog Grid</a>
-                    <li> <a asp-action="BlogDetail" asp-controller="Home">Blog Detail</a>
+                  <ul>                   
+                    <li> <a asp-action="BlogGrid" asp-controller="Home">Blog Grid</a>                   
                   </ul>
                 </li>
-                <li> <a href="#">Pages</a>
-                  <ul>
-                     <li> <a asp-action="Career" asp-controller="Home">Career</a>
-                         <li> <a asp-action="Shop" asp-controller="Shop">Shop</a>
+                <li> <a href="#">Privacy and more</a>
+                  <ul>                             
                     <li> <a asp-action="Price" asp-controller="Home">Price</a>
                      <li> <a asp-action="FAQ" asp-controller="Home">FAQ</a>
                    <li> <a asp-action="Privacy" asp-controller="Home">Privacy Policy</a>
                     <li> <a asp-action="Error" asp-controller="Home">404</a>
                   </ul>
                 </li>
-                <li> <a asp-action="Shop" asp-controller="Home">Shop</a>
-                  <ul>
-                    <li><a href="it_shop.html">Shop List</a></li>
-                    <li> <a asp-action="ShopDetail" asp-controller="Home">Shop Details</a>
-                    <li> <a asp-action="ShopDetail" asp-controller="Shop">Shop Details</a>
-                    <li><a href="it_checkout.html">Checkout</a></li>
-                  </ul>
+                 <li> <a asp-action="ProductShop" asp-controller="Product">Shop</a>
+                  
                 </li>
-                <li> <a href="it_contact.html">Contact</a>
-                  <ul>
-                    <li><a href="it_contact.html">Contact Page 1</a></li>
-                    <li><a href="it_contact_2.html">Contact Page 2</a></li>
-                  </ul>
+                <li> <a asp-action="Contact" asp-controller="Home">Contact</a>
+                  
                 </li>
               </ul>
             </div>
@@ -143,66 +127,40 @@
         </div>
       </div>
     </div>
-
-     <form asp-action="ProductShop" method="post" role="form">
-     <div class="col-md-4">
-        <div class="full" style="margin-top: 35px;">
-          
-           
-          <fieldset class="form-group">
-              <h3>Choose your filter</h3>
-              <legend class="col-sn-3 control-label"></legend>
-              <div class="checkbox checkboxlist col-sm-9">
-                            @foreach(var item in Model.ProductSelectList.DistinctBy(x=>x.ProductBrand))
-                            { 
-                                <input asp-for="SelectItem" value="@item.ProductBrand" type="radio" />
-                                <label asp-for="@item.ProductBrand">@item.ProductBrand</label>
-                                <input asp-for="@item.ProductBrand" type="hidden"/>
-                            }
-                            
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                    <input id="submit" value="Submit" type="submit"/>
-                                </div>
-                            </div>
-                        </div>
-                          </fieldset>
-                    </div>
-                    </div>
-
-         
-     </form>
      
-    <div class="row">
-        @foreach(var item in Model.ProductSelectList){
-      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 margin_bottom_30_all">
-        <div class="product_list">
-          <div class="product_img"> <img class="img-responsive" src="@item.ProductImage" alt=""> </div>
-          <div class="product_detail_btm">
-            <div class="center">
-              <h4><a href="/Product/ProductDetail/@item.ProductID">@item.ProductBrand @item.ProductModel</a></h4>
-            </div>
-            <div class="starratin">
-              <div class="center"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </div>
-            </div>
-            <div class="product_price">
-              <p> <span class="new_price">@item.Price$</span></p>
-            </div>
+</div> 
 
-          </div>
-          
-           <button type="button" class="btn sqaure_bt">@Html.ActionLink("Add to cart", "Buy", 
-        "ShoppingCart", new { id = item.ProductID }, "")</button>
-        
-        </div>
-        
-      </div>
-  
+  <div id="productsDiv">
+        @{
+            var filterviewmodel = new WebProjectOnAzure.ViewModels.ShopViewModels.FilterViewModel();
+            filterviewmodel.Categories = Model.Categories;
+            filterviewmodel.Pager = Model.Pager;
+            filterviewmodel.CategoryID = Model.CategoryID;
+            filterviewmodel.Products = Model.Products;
+            filterviewmodel.SortBy = Model.SortBy;
+            filterviewmodel.ShopStyle = Model.ShopStyle;
+            filterviewmodel.SearchTerm = Model.SearchTerm;
+            filterviewmodel.CategoryCheckIds = Model.CategoryCheckIds;
+            filterviewmodel.MaximumPrice = Model.MaximumPrice;
+            filterviewmodel.MinPrice = Model.MinPrice;
+            filterviewmodel.InitialMaximumPrice = Model.InitialMaximumPrice;
+            await Html.RenderPartialAsync("FilterForProduct", filterviewmodel);
 
-      }
-      </div>
-      </div>
+}
+            </div>
+             
+   
+      </div> 
       
+      
+     
+     
+     
+ 
 
+ 
+
+        
+
+        
+ 

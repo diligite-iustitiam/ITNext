@@ -17,7 +17,7 @@
     }
     .filter-widget .filter-range-wrap .range-slider .price-input:after{
         position:absolute;
-        left:112px;
+        left:101px;
         top:13px;
         height:1px;
         width:17px;
@@ -104,7 +104,7 @@
                         <input type="hidden" name="minimumPrice" value="@Model.MinPrice" disabled=disabled />
                         <input type="hidden" name="maximumPrice" value="@Model.MaximumPrice" disabled=disabled/>
                         <button type="submit" class="btn btn-primary">Filter</button>
-                        <a class="btn btn-danger" href="@Url.Action("ProductByBrand,Product",new {shopstyle= Model.ShopStyle})">Reset Filter</a>
+                        <a class="btn btn-danger" href="@Url.Action("ProductShop", "Product",new {shopstyle= Model.ShopStyle})">Reset Filter</a>
                     </form>
                 </div>
                 </div>
@@ -129,11 +129,11 @@
 
           </div>
           
-           <button type="button" class="btn sqaure_bt">@Html.ActionLink("Add to cart", "Buy", 
-        "ShoppingCart", new { id = item.ProductID }, "")</button>
+          
         
         </div>
-        
+         <button type="button" class="btn sqaure_bt">@Html.ActionLink("Add to cart", "Buy", 
+        "ShoppingCart", new { id = item.ProductID }, "")</button>
       </div>
   
       }

@@ -58,29 +58,10 @@ namespace WebProjectOnAzure.Controllers
         {
             return View();
         }
-        
-
-        [HttpGet]
-        public IActionResult ProductShop(string category) {
-      
-            var shop = new ViewModel();
-            shop.Categories= _context.Categories.Include("Product").Single(n => n.CategoryName == category);
-            shop.ProductSelectList = _context.Products.Where(x => x.Category.CategoryName.Contains(category)).ToList();
-            
-            shop.SelectItem = string.Empty;            
-            //var shop = _context.Categories.FirstOrDefault(x => x.CategoryName == category);
-            if (shop == null)
-            {
-                return NotFound();
-            }
-           
-            return View(shop);
-
-        }
-
-        public async Task<IActionResult> ProductByBrand(string searchTerm, int? minimumPrice, int? maximumPrice,int? categoryID, int? sortBy, int? pageNo, int? shopstyle, string ItemIds)
+  
+        public async Task<IActionResult> ProductShop(string searchTerm, int? minimumPrice, int? maximumPrice,int? categoryID, int? sortBy, int? pageNo, int? shopstyle, string ItemIds)
         {
-            int pageSize = 6;
+            int pageSize = 8;
            
             List<int> pictureIDs = !string.IsNullOrEmpty(ItemIds) ? ItemIds.Split(',').Select(x => int.Parse(x)).ToList() : new List<int>();
 
@@ -103,7 +84,7 @@ namespace WebProjectOnAzure.Controllers
         [HttpPost]
         public async Task<IActionResult> FilterForProduct(string searchTerm, int? minimumPrice, int? maximumPrice, int? categoryID, int? sortBy, int? pageNo, int? shopstyle, string ItemIds)
         {
-            int pageSize = 6;
+            int pageSize = 8;
             List<int> pictureIDs = !string.IsNullOrEmpty(ItemIds) ? ItemIds.Split(',').Select(x => int.Parse(x)).ToList() : new List<int>();          
             FilterViewModel model = new();
             model.SearchTerm = searchTerm;
@@ -125,13 +106,6 @@ namespace WebProjectOnAzure.Controllers
 
         }
 
-
-            public IActionResult CategoriesList()
-        {
-            var categories = _context.Categories.ToList();
-
-            return View(categories);
-        }
         // POST: Product/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

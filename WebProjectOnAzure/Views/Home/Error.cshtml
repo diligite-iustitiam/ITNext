@@ -64,7 +64,7 @@
             </div>
           </div>
           <div class="float-right">
-            <div class="make_appo"> <a class="btn white_btn" href="make_appointment.html">Make Appointment</a> </div>
+            <div class="make_appo"> <a class="btn white_btn" asp-action="Appointment" asp-controller="Home">Make Appointment</a> </div>
           </div>
         </div>
       </div>
@@ -72,64 +72,44 @@
   </div>
   <!-- end header top -->
   <!-- header bottom -->
-  <div class="header_bottom">
+   <div class="header_bottom">
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
           <!-- logo start -->
-          <div class="logo"> <a href="it_home.html"><img src="~/images/logos/it_logo.png" alt="logo" /></a> </div>
+          <div class="logo"> <a asp-action="Index" asp-controller="Home"><img src="~/images/logos/it_logo.png" alt="logo" /></a> </div>
           <!-- logo end -->
         </div>
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-         <!-- menu start -->
-          <div class="menu_side">
+          <!-- menu start -->
+           <div class="menu_side">
             <div id="navbar_menu">
-              <ul class="first-ul">
-                  <li> <a asp-action="ShopIndex" asp-controller="Shop">IndexShop</a>
-                <li> <a asp-action="Home" asp-controller="Home">Home</a>
-                  <ul>
-                    <li> <a asp-action="Home" asp-controller="Home">Home</a>
-                     
-                  </ul>
-                </li>
-                 <li><a asp-action="Chat" asp-controller="Home">Chat</a></li>
+              <ul class="first-ul">               
+                  <li> <a asp-action="AdminIndex" asp-controller="Home">Admin DashBoard</a>
                <li> <a asp-action="About" asp-controller="Home">About us</a>
                 <li> <a asp-action="Service" asp-controller="Home">Service</a>
-                  <ul>
-                    <li> <a asp-action="ServiceList" asp-controller="Home">Service List</a>
+                  <ul>                   
                     <li> <a asp-action="ServiceDetail" asp-controller="Home">Service Details</a>
                   </ul>
                 </li>
                 <li> <a asp-action="Blog" asp-controller="Home">Blog</a>
-                  <ul>
-                    <li> <a asp-action="Blog" asp-controller="Home">Blog List</a>
-                    <li> <a asp-action="BlogGrid" asp-controller="Home">Blog Grid</a>
-                    <li> <a asp-action="BlogDetail" asp-controller="Home">Blog Detail</a>
+                  <ul>                   
+                    <li> <a asp-action="BlogGrid" asp-controller="Home">Blog Grid</a>                   
                   </ul>
                 </li>
-                <li> <a href="#">Pages</a>
-                  <ul>
-                     <li> <a asp-action="Career" asp-controller="Home">Career</a>
-                        
+                <li> <a href="#">Privacy and more</a>
+                  <ul>                             
                     <li> <a asp-action="Price" asp-controller="Home">Price</a>
                      <li> <a asp-action="FAQ" asp-controller="Home">FAQ</a>
                    <li> <a asp-action="Privacy" asp-controller="Home">Privacy Policy</a>
                     <li> <a asp-action="Error" asp-controller="Home">404</a>
                   </ul>
                 </li>
-                 <li> <a asp-action="Shop" asp-controller="Shop">Shop</a>
-                  <ul>
-                    <li><a href="it_shop.html">Shop List</a></li>
-                    <li> <a asp-action="ShopDetail" asp-controller="Home">Shop Details</a>
-                    <li><a href="it_cart.html">Shopping Cart</a></li>
-                    <li><a href="it_checkout.html">Checkout</a></li>
-                  </ul>
+                 <li> <a asp-action="ProductShop" asp-controller="Product">Shop</a>
+                  
                 </li>
-                <li> <a href="it_contact.html">Contact</a>
-                  <ul>
-                    <li><a href="it_contact.html">Contact Page 1</a></li>
-                    <li><a href="it_contact_2.html">Contact Page 2</a></li>
-                  </ul>
+                <li> <a asp-action="Contact" asp-controller="Home">Contact</a>
+                  
                 </li>
               </ul>
             </div>
@@ -140,11 +120,17 @@
             </div>
             <partial name="_LoginPartial"/>
           </div>
+            <div class="search_icon">
+              <ul>
+                <li><a href="#" data-toggle="modal" data-target="#search_bar"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+              </ul>
+            </div>
+          </div>
           <!-- menu end -->
         </div>
       </div>
     </div>
-  </div>
+  
   <!-- header bottom end -->
 </header>
 <!-- end header -->

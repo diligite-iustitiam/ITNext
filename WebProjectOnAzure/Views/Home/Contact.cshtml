@@ -1,39 +1,9 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<head>
-<!-- basic -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!-- mobile metas -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1">
-<!-- site metas -->
-<title>It.Next - IT Service Responsive Html Theme</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="author" content="">
-<!-- site icons -->
-<link rel="icon" href="images/fevicon/fevicon.png" type="image/gif" />
-<!-- bootstrap css -->
-<link rel="stylesheet" href="css/bootstrap.min.css" />
-<!-- Site css -->
-<link rel="stylesheet" href="css/style.css" />
-<!-- responsive css -->
-<link rel="stylesheet" href="css/responsive.css" />
-<!-- colors css -->
-<link rel="stylesheet" href="css/colors1.css" />
-<!-- custom css -->
-<link rel="stylesheet" href="css/custom.css" />
-<!-- wow Animation css -->
-<link rel="stylesheet" href="css/animate.css" />
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-</head>
-<body id="default_theme" class="it_service blog_grid">
+
+<body id="default_theme" class="contact_us">
 <!-- loader -->
-<div class="bg_load"> <img class="loader_animation" src="~/images/loaders/loader_1.png" alt="#" /> </div>
+<div class="bg_load"> <img class="loader_animation" src="images/loaders/loader_1.png" alt="#" /> </div>
 <!-- end loader -->
 <!-- header -->
 <header id="default_header" class="header_style_1">
@@ -64,7 +34,7 @@
             </div>
           </div>
           <div class="float-right">
-            <div class="make_appo"> <a class="btn white_btn" href="make_appointment.html">Make Appointment</a> </div>
+            <div class="make_appo"> <a class="btn white_btn" asp-action="Appointment" asp-controller="Home">Make Appointment</a> </div>
           </div>
         </div>
       </div>
@@ -82,54 +52,34 @@
         </div>
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
           <!-- menu start -->
-          <div class="menu_side">
+           <div class="menu_side">
             <div id="navbar_menu">
-              <ul class="first-ul">
-                  <li> <a asp-action="ShopIndex" asp-controller="Shop">IndexShop</a>
-                <li> <a asp-action="Home" asp-controller="Home">Home</a>
-                  <ul>
-                    <li> <a asp-action="Home" asp-controller="Home">Home</a>
-                     
-                  </ul>
-                </li>
-                 <li><a asp-action="Chat" asp-controller="Home">Chat</a></li>
+              <ul class="first-ul">               
+                  <li> <a asp-action="AdminIndex" asp-controller="Home">Admin DashBoard</a>
                <li> <a asp-action="About" asp-controller="Home">About us</a>
                 <li> <a asp-action="Service" asp-controller="Home">Service</a>
-                  <ul>
-                    <li> <a asp-action="ServiceList" asp-controller="Home">Service List</a>
+                  <ul>                   
                     <li> <a asp-action="ServiceDetail" asp-controller="Home">Service Details</a>
                   </ul>
                 </li>
                 <li> <a asp-action="Blog" asp-controller="Home">Blog</a>
-                  <ul>
-                    <li> <a asp-action="Blog" asp-controller="Home">Blog List</a>
-                    <li> <a asp-action="BlogGrid" asp-controller="Home">Blog Grid</a>
-                    <li> <a asp-action="BlogDetail" asp-controller="Home">Blog Detail</a>
+                  <ul>                   
+                    <li> <a asp-action="BlogGrid" asp-controller="Home">Blog Grid</a>                   
                   </ul>
                 </li>
-                <li> <a href="#">Pages</a>
-                  <ul>
-                     <li> <a asp-action="Career" asp-controller="Home">Career</a>
-                        
+                <li> <a href="#">Privacy and more</a>
+                  <ul>                             
                     <li> <a asp-action="Price" asp-controller="Home">Price</a>
                      <li> <a asp-action="FAQ" asp-controller="Home">FAQ</a>
                    <li> <a asp-action="Privacy" asp-controller="Home">Privacy Policy</a>
                     <li> <a asp-action="Error" asp-controller="Home">404</a>
                   </ul>
                 </li>
-                 <li> <a asp-action="Shop" asp-controller="Shop">Shop</a>
-                  <ul>
-                    <li><a href="it_shop.html">Shop List</a></li>
-                    <li> <a asp-action="ShopDetail" asp-controller="Home">Shop Details</a>
-                    <li><a href="it_cart.html">Shopping Cart</a></li>
-                    <li><a href="it_checkout.html">Checkout</a></li>
-                  </ul>
+                 <li> <a asp-action="ProductShop" asp-controller="Product">Shop</a>
+                  
                 </li>
-                <li> <a href="it_contact.html">Contact</a>
-                  <ul>
-                    <li><a href="it_contact.html">Contact Page 1</a></li>
-                    <li><a href="it_contact_2.html">Contact Page 2</a></li>
-                  </ul>
+                <li> <a asp-action="Contact" asp-controller="Home">Contact</a>
+                  
                 </li>
               </ul>
             </div>
@@ -140,11 +90,17 @@
             </div>
             <partial name="_LoginPartial"/>
           </div>
+            <div class="search_icon">
+              <ul>
+                <li><a href="#" data-toggle="modal" data-target="#search_bar"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+              </ul>
+            </div>
+          </div>
           <!-- menu end -->
         </div>
       </div>
     </div>
-  </div>
+ 
   <!-- header bottom end -->
 </header>
 <!-- end header -->
@@ -156,10 +112,10 @@
         <div class="full">
           <div class="title-holder">
             <div class="title-holder-cell text-left">
-              <h1 class="page-title">Blog Grid</h1>
+              <h1 class="page-title">Contact</h1>
               <ol class="breadcrumb">
                 <li><a href="index.html">Home</a></li>
-                <li class="active">Blog Grid</li>
+                <li class="active">Contact</li>
               </ol>
             </div>
           </div>
@@ -169,189 +125,97 @@
   </div>
 </div>
 <!-- end inner page banner -->
-<!-- section -->
-<div class="section padding_layout_1 blog_grid">
+<div class="section padding_layout_1">
   <div class="container">
     <div class="row">
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-        <div class="full">
-          <div class="blog_section">
-            <div class="blog_feature_img"> <img class="img-responsive" src="~/images/it_service/22.jpg" alt="#"> </div>
-            <div class="blog_feature_cantant">
-              <p class="blog_head">EaseUS Partition Master</p>
-              <div class="post_info">
-                <ul>
-                  <li><i class="fa fa-user" aria-hidden="true"></i> Marketing</li>
-                  <li><i class="fa fa-comment" aria-hidden="true"></i> 5</li>
-                  <li><i class="fa fa-calendar" aria-hidden="true"></i> 12 Aug 2017</li>
-                </ul>
+      <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12"></div>
+      <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="full">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 adress_cont margin_bottom_30">
+              <h4>Address One</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. sed do eiusmod tempor.</p>
+              <div class="information_bottom left-side margin_bottom_20_all">
+                <div class="icon_bottom"> <i class="fa fa-road" aria-hidden="true"></i> </div>
+                <div class="info_cont">
+                  <h4>Lorem Ipsum is simply dummy text..</h4>
+                  <p>Melbourne Australia</p>
+                </div>
               </div>
-              <p>You can repair SSD manually or use EaseUS Partition Master - an SSD repair tool to help you fix corrupted SSD.
-                  If all these methods don't work out well, contact your SSD manufacturer and see if they have any better solutions for you </p>
-              <div class="bottom_info">
-                <div class="pull-left"><a class="read_more" href="it_blog_detail.html">READ MORE <i class="fa fa-angle-right"></i></a></div>
-                <div class="pull-right">
-                  <div class="shr">Share: </div>
-                  <div class="social_icon">
-                    <ul>
-                      <li class="fb"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                      <li class="twi"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                      <li class="gp"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                      <li class="pint"><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                    </ul>
-                  </div>
+              <div class="information_bottom left-side margin_bottom_20_all">
+                <div class="icon_bottom"> <i class="fa fa-user" aria-hidden="true"></i> </div>
+                <div class="info_cont">
+                  <h4>0011 234 56789</h4>
+                  <p>Mon-Fri 8:30am-6:30pm</p>
+                </div>
+              </div>
+              <div class="information_bottom left-side">
+                <div class="icon_bottom"> <i class="fa fa-envelope" aria-hidden="true"></i> </div>
+                <div class="info_cont">
+                  <h4>Example@gmail.com</h4>
+                  <p>24/7 online support</p>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="blog_section">
-            <div class="blog_feature_cantant theme_color_bg white_fonts">
-              <p class="blog_head">Hard drive repair</p>
-              <div class="post_info">
-                <ul>
-                  <li><i class="fa fa-user" aria-hidden="true"></i> Marketing</li>
-                  <li><i class="fa fa-comment" aria-hidden="true"></i> 5</li>
-                  <li><i class="fa fa-calendar" aria-hidden="true"></i> 12 Aug 2017</li>
-                </ul>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 adress_cont margin_bottom_30_all">
+              <h4>Address Two</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. sed do eiusmod tempor.</p>
+              <div class="information_bottom left-side margin_bottom_20_all">
+                <div class="icon_bottom"> <i class="fa fa-road" aria-hidden="true"></i> </div>
+                <div class="info_cont">
+                  <h4>Lorem Ipsum is simply dummy text..</h4>
+                  <p>Sydney Australia</p>
+                </div>
               </div>
-              <p>Hard drive repair is possible, but they should NOT be reused after a recovery! Of course, HDDs can be repaired!
-                  However, a repaired HDD should not be reused, but rather, have its contents recovered immediately and then be
-                  discarded as it cannot be trusted to work into the future. </p>
-              <div class="bottom_info">
-                <div class="pull-left"><a class="read_more" href="it_blog_detail.html">READ MORE <i class="fa fa-angle-right"></i></a></div>
-                <div class="pull-right">
-                  <div class="shr">Share: </div>
-                  <div class="social_icon">
-                    <ul>
-                      <li class="fb"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                      <li class="twi"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                      <li class="gp"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                      <li class="pint"><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                    </ul>
-                  </div>
+              <div class="information_bottom left-side margin_bottom_20_all">
+                <div class="icon_bottom"> <i class="fa fa-user" aria-hidden="true"></i> </div>
+                <div class="info_cont">
+                  <h4>0011 234 56789</h4>
+                  <p>Mon-Fri 8:30am-6:30pm</p>
+                </div>
+              </div>
+              <div class="information_bottom left-side">
+                <div class="icon_bottom"> <i class="fa fa-envelope" aria-hidden="true"></i> </div>
+                <div class="info_cont">
+                  <h4>Example@gmail.com</h4>
+                  <p>24/7 online support</p>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-        <div class="full">
-          <div class="blog_section">
-            <div class="blog_feature_cantant theme_color_bg white_fonts">
-              <p class="blog_head">What is the most reliable data recovery software?</p>
-              <div class="post_info">
-                <ul>
-                  <li><i class="fa fa-user" aria-hidden="true"></i> Marketing</li>
-                  <li><i class="fa fa-comment" aria-hidden="true"></i> 5</li>
-                  <li><i class="fa fa-calendar" aria-hidden="true"></i> 12 Aug 2017</li>
-                </ul>
-              </div>
-              <p>FonePaw Data Recovery.
-                    R-Studio Data Recovery Software.
-                    PhotoRec.
-                    TestDisk.
-                    PC Inspector File Recovery.
-                    Wise Data Recovery.
-                    Undelete 360.
-                    Disk Drill. </p>
-              <div class="bottom_info">
-                <div class="pull-left"><a class="read_more" href="it_blog_detail.html">READ MORE <i class="fa fa-angle-right"></i></a></div>
-                <div class="pull-right">
-                  <div class="shr">Share: </div>
-                  <div class="social_icon">
-                    <ul>
-                      <li class="fb"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                      <li class="twi"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                      <li class="gp"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                      <li class="pint"><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                    </ul>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 contant_form">
+              <h4>GET IN TOUCH</h4>
+              <p>Our goal is to provide the best customer service and to answer all of your questions in a timely manner.</p>
+              <div class="form_section">
+                <form class="form_contant" action="index.html">
+                  <fieldset>
+                  <div class="row">
+                    <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <input class="field_custom" placeholder="Websire URL" type="text" required />
+                    </div>
+                    <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <input class="field_custom" placeholder="Your name" type="text" required />
+                    </div>
+                    <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <input class="field_custom" placeholder="Email adress" type="email" required />
+                    </div>
+                    <div class="field col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <input class="field_custom" placeholder="Phone number" type="text" required />
+                    </div>
+                    <div class="field col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <textarea class="field_custom" placeholder="Messager" required ></textarea>
+                    </div>
+                    <div class="center"><a class="btn main_bt" href="#">SUBMIT NOW</a></div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="blog_section">
-            <div class="blog_feature_img"> <img class="img-responsive" src="~/images/it_service/dark_bg_img2.png" alt="#"> </div>
-            <div class="blog_feature_cantant">
-              <p class="blog_head">Which site offers a free download for data recovery software?</p>
-              <div class="post_info">
-                <ul>
-                  <li><i class="fa fa-user" aria-hidden="true"></i> Marketing</li>
-                  <li><i class="fa fa-comment" aria-hidden="true"></i> 5</li>
-                  <li><i class="fa fa-calendar" aria-hidden="true"></i> 12 Aug 2017</li>
-                </ul>
-              </div>
-              <p>EaseUS® free data recovery software is your second to none choice for quick but complete file
-                  recovery from Windows desktops, laptops, and other Windows-compatible devices. </p>
-              <div class="bottom_info">
-                <div class="pull-left"><a class="read_more" href="it_blog_detail.html">READ MORE <i class="fa fa-angle-right"></i></a></div>
-                <div class="pull-right">
-                  <div class="shr">Share: </div>
-                  <div class="social_icon">
-                    <ul>
-                      <li class="fb"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                      <li class="twi"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                      <li class="gp"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                      <li class="pint"><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
+                  </fieldset>
+                </form>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-        <div class="full">
-          <div class="blog_section">
-            <div class="blog_feature_img"> <img class="img-responsive" src="~/images/it_service/post-03.jpg" alt="#"> </div>
-          </div>
-          <div class="blog_section" style="margin-bottom: 0;">
-            <div class="blog_feature_img"> <img class="img-responsive" src="~/images/it_service/22.jpg" alt="#"> </div>
-            <div class="blog_feature_cantant">
-              <p class="blog_head">Do data recovery programs work?</p>
-              <div class="post_info">
-                <ul>
-                  <li><i class="fa fa-user" aria-hidden="true"></i> Marketing</li>
-                  <li><i class="fa fa-comment" aria-hidden="true"></i> 5</li>
-                  <li><i class="fa fa-calendar" aria-hidden="true"></i> 12 Aug 2017</li>
-                </ul>
-              </div>
-              <p>In general, data recovery works because, even after a file is 'lost' or deleted, all or most of the information about that file still remains on the storage device. The only time that data recovery is a complete lost cause is when a file was never written in the first place. </p>
-              <div class="bottom_info">
-                <div class="pull-left"><a class="read_more" href="it_blog_detail.html">READ MORE <i class="fa fa-angle-right"></i></a></div>
-                <div class="pull-right">
-                  <div class="shr">Share: </div>
-                  <div class="social_icon">
-                    <ul>
-                      <li class="fb"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                      <li class="twi"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                      <li class="gp"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                      <li class="pint"><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="blog_section">
-            <div class="blog_feature_img"> <img class="img-responsive" src="~/images/it_service/dark_bg_img.png" alt="#"> </div>
-          </div>
-        </div>
-      </div>
-      <div class="center">
-        <ul class="pagination style_1">
-          <li><a href="#"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-          <li><a href="it_blog.html">1</a></li>
-          <li class="active"><a href="#">2</a></li>
-          <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-        </ul>
       </div>
     </div>
   </div>
 </div>
-<!-- end section -->
 <!-- section -->
 <div class="section padding_layout_1 testmonial_section white_fonts">
   <div class="container">
@@ -380,7 +244,7 @@
               <div class="carousel-item active">
                 <div class="testimonial-container">
                   <div class="testimonial-content"> You guys rock! Thank you for making it painless, pleasant and most of all hassle free! I wish I would have thought of it first. 
-                    I am really satisfied with my first laptop service.</div>
+                    I am really satisfied with my first laptop service. </div>
                   <div class="testimonial-photo"> <img src="~/images/it_service/client1.jpg" class="img-responsive" alt="#" width="150" height="150"> </div>
                   <div class="testimonial-meta">
                     <h4>Maria Anderson</h4>
@@ -390,7 +254,7 @@
               <div class="carousel-item">
                 <div class="testimonial-container">
                   <div class="testimonial-content"> You guys rock! Thank you for making it painless, pleasant and most of all hassle free! I wish I would have thought of it first. 
-                    I am really satisfied with my first laptop service.</div>
+                    I am really satisfied with my first laptop service. </div>
                   <div class="testimonial-photo"> <img src="~/images/it_service/client2.jpg" class="img-responsive" alt="#" width="150" height="150"> </div>
                   <div class="testimonial-meta">
                     <h4>Maria Anderson</h4>
@@ -400,7 +264,7 @@
               <div class="carousel-item">
                 <div class="testimonial-container">
                   <div class="testimonial-content"> You guys rock! Thank you for making it painless, pleasant and most of all hassle free! I wish I would have thought of it first. 
-                    I am really satisfied with my first laptop service.</div>
+                    I am really satisfied with my first laptop service. </div>
                   <div class="testimonial-photo"> <img src="~/images/it_service/client3.jpg" class="img-responsive" alt="#" width="150" height="150"> </div>
                   <div class="testimonial-meta">
                     <h4>Maria Anderson</h4>
@@ -554,14 +418,14 @@
 </footer>
 <!-- end footer -->
 <!-- js section -->
-<script src="~/js/jquery.min.js"></script>
-<script src="~/js/bootstrap.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <!-- menu js -->
-<script src="~/js/menumaker.js"></script>
+<script src="js/menumaker.js"></script>
 <!-- wow animation -->
-<script src="~/js/wow.js"></script>
+<script src="js/wow.js"></script>
 <!-- custom js -->
-<script src="~/js/custom.js"></script>
+<script src="js/custom.js"></script>
 <script>
 
       // This example adds a marker to indicate the position of Bondi Beach in Sydney,
@@ -671,5 +535,17 @@
 <!-- google map js -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap"></script>
 <!-- end google map js -->
+<!-- zoom effect -->
+<script src='js/hizoom.js'></script>
+<script>
+        $('.hi1').hiZoom({
+            width: 300,
+            position: 'right'
+        });
+        $('.hi2').hiZoom({
+            width: 400,
+            position: 'right'
+        });
+    </script>
 </body>
 </html>

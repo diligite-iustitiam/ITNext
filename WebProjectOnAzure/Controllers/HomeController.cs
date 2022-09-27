@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
-
+using WebProjectOnAzure.Data;
 using WebProjectOnAzure.Models;
 using WebProjectOnAzure.Services;
 
@@ -12,10 +12,12 @@ namespace WebProjectOnAzure.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ITShopService _shopService;
+        private readonly ShopContext _shopContext;
        
 
-        public HomeController(ILogger<HomeController> logger, ITShopService shopService)
+        public HomeController(ILogger<HomeController> logger, ITShopService shopService, ShopContext shopContext)
         {
+            _shopContext = shopContext;
             _logger = logger;
             _shopService = shopService;
             
@@ -25,8 +27,8 @@ namespace WebProjectOnAzure.Controllers
         public IActionResult Index()
         {
 
-            List<ITShop> tShops = _shopService.Get().ToList();
-            return View(tShops);
+            IEnumerable<Product> products = _shopContext.Products.ToList();
+            return View(products);
         }
         public IActionResult AdminIndex()
         {
@@ -86,7 +88,14 @@ namespace WebProjectOnAzure.Controllers
         {
             return View();
         }
-
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        public IActionResult Appointment()
+        {
+            return View();
+        }
 
 
     }
