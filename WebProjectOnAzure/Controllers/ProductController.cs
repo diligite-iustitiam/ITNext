@@ -126,6 +126,8 @@ namespace WebProjectOnAzure.Controllers
 
         public async Task<IActionResult> ProductDetail(int? id)
         {
+            var products = _context.Products.ToList();
+            ViewBag.products = products;
             if (id == null || _context.Products == null)
             {
                 return NotFound();
