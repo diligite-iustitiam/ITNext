@@ -1,0 +1,71 @@
+﻿@model Shop.Application.Products.Queries.GetProductList.ProductListVm
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].ProductID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].ProductBrand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].ProductModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].ProductDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products[0].ProductImage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Products) {
+            
+            <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductBrand)
+            </td>      
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductModel)
+            </td>   
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductDescription)
+            </td>   
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td> 
+            <td>    
+                @if (item.ProductImage != null)
+               {
+           <img class="img-responsive" src="@Url.Content(item.ProductImage)" alt=""> 
+                }
+                
+            </td>
+           <td>
+                <a href="@Url.Action("Edit", "Product",new {ProductID =@item.ProductID})">Edit</a> |
+              <a href="@Url.Action("Details", "Product",new {ProductID =@item.ProductID})">Details</a> |
+                <a href="@Url.Action("Delete", "Product",new {ProductID =@item.ProductID})">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,415 @@
+﻿@model WebProjectOnAzure.ViewModels.ShopViewModels.FilterViewModel
+
+
+
+<style>
+    .filter-widget {
+        margin-bottom: 45px;
+    }
+    .filter-widget .filter-range-wrap{
+        margin-bottom: 40px;
+    }
+    .filter-widget .filter-range-wrap .range-slider{
+        margin-bottom: 25px;
+    }
+    .filter-widget .filter-range-wrap .range-slider .price-input{
+        position:relative;
+    }
+    .filter-widget .filter-range-wrap .range-slider .price-input:after{
+        position:absolute;
+        left:101px;
+        top:13px;
+        height:1px;
+        width:17px;
+        background: #ebebeb;
+        content: "";
+    }
+    .filter-widget .filter-range-wrap .range-slider .price-input input{
+        font-size:16px;
+        color:#252525;
+        max-width: 30%;
+        text-align:center;
+        border:1px solid #ebebeb;
+        border-radius: 2px;
+    }
+    .filter-widget .filter-range-wrap .range-slider .price-input input:nth-child(1){
+        margin-right: 20px;
+    }
+    .filter-widget .filter-range-wrap .price-range{
+        border-radius:0;
+    }
+    .filter-widget .filter-range-wrap .price-range .ui-widget-content{
+        border:none;
+        background: #ebebeb;
+        height:3px;
+    }
+    .filter-widget .filter-range-wrap .price-range .ui-widget-content .ui-slider-handle{
+        height:16px;
+        width:16px;
+        border-radius:50%;
+        background: #ffffff;
+        border:none;
+        -webkit-box-shadow: 1px 6px 14px -4px #425c3d;
+        box-shadow: 1px 6px 14px -4px #425c3d;
+        outline:none;
+    }
+    .filter-widget .filter-range-wrap .price-range .ui-slider-range{
+        background: #ebebeb;
+        border-radius: 0;
+    }
+    .filter-widget .filter-range-wrap .price-range .ui-slider-range.ui-corner-all.ui-widget-header:last-child{
+        background:#3c7be7;
+    }
+</style>
+ <div class="col-md-4">   
+        <div class="full" style="margin-top: 35px;">
+            <h4 class="my-4 text-danger text-center">Add Filter</h4>
+            <div class="list-group">
+                <form role="search" method="get" class="form-inline list-group-item border-0">
+                    <label class="pb-1 mb-1">
+                        <input type="search" class="form-control mr-sm-2" placeholder="Search.." value="@Model.SearchTerm" name="searchTerm" id="searchTerm"/>
+                    </label>
+                     <input type="submit" class="btn btn-outline-success form-control-sm my-2 my-sm-0" value="Search" id="actionButton" />
+                </form>
+                  <div class="container-fluid list-group-item border-0">
+                    <p class="text-black-50 fw-bold text-start">Featured Categories</p>
+                    <div id="categoryArea" >
+                            @foreach(var category in Model.Categories)
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="@category.CategoryID" id="item_@category.CategoryID" @(Model.CategoryCheckIds.Contains(category.CategoryID)? "checked" : "") onclick="SaveItems()">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        @category.CategoryName
+                                    </label>                             
+                            
+                        </div>
+                        }
+                </div>
+     <div class="filter-widget">
+                    <p class="text-black-50 font-weight-bold text-start">Price</p>
+                    <div class="filter-range-wrap">
+                        <div class="range-slider">
+                            <div class="price-input">
+                                <input type="text" id="minamount" >
+                                <input type="text" id="maxamount" >
+                            </div>
+                        </div>
+                        <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget-content" data-min="0" data-max="@Model.MaximumPrice">
+                            <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span> 
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span> 
+                        </div>
+                    </div>
+                    <form id="priceRangeForm" method="post" action="">
+                        <input type="hidden" name="minimumPrice" value="@Model.MinPrice" disabled=disabled />
+                        <input type="hidden" name="maximumPrice" value="@Model.MaximumPrice" disabled=disabled/>
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                        <a class="btn btn-danger" href="@Url.Action("ProductShop", "Product",new {shopstyle= Model.ShopStyle})">Reset Filter</a>
+                    </form>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                <div class="row">
+        @foreach(var item in Model.Products){
+      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 margin_bottom_30_all">
+        <div class="product_list">
+          <div class="product_img"> <img class="img-responsive" src="@item.ProductImage" alt=""> </div>
+          <div class="product_detail_btm">
+            <div class="center">
+              <h4><a href="@Url.Action("ProductDetail", "Product",new {ProductID = item.ProductID})">@item.ProductBrand @item.ProductModel</a></h4> |
+            </div>
+            <div class="starratin">
+              <div class="center"> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star" aria-hidden="true"></i> <i class="fa fa-star-o" aria-hidden="true"></i> </div>
+            </div>
+            <div class="product_price">
+              <p> <span class="new_price">@item.Price$</span></p>
+            </div>
+
+          </div>
+          
+          
+        
+        </div>
+         <button type="button" class="btn sqaure_bt">@Html.ActionLink("Add to cart", "Buy", 
+        "ShoppingCart", new { id = item.ProductID }, "")</button>
+      </div>
+  
+      }
+      </div>
+      
+@if (Model.Pager != null && Model.Pager.TotalPages > 1)
+{
+    <nav>
+        <ul class="pagination justify-content-end">
+            
+            @for (var pge = Model.Pager.StartPage; pge <= Model.Pager.EndPage; pge++)
+            {
+                string activeClass = Model.Pager.CurrentPage == pge ? "active bg-info" : string.Empty;
+                <li class="page-item @activeClass">
+                    <a data-href="@Url.Action("FilterForProduct", "Product", new{pageNo = pge, sortBy= Model.SortBy, categoryID = Model.CategoryID})" class="pageDataLink page-link">@pge</a></li>
+            }
+           
+        </ul>
+    </nav>
+    }
+     
+    <script>
+var rangeSlider = $(".price-range"),
+    minamount = $("#minamount"),
+    maxamount = $("#maxamount");
+
+$(document).ready(function() {
+    rangeSlider.slider({
+        range: true,
+        min: 0,
+        max: 15000,
+        values: [@Model.MinPrice, @Model.MaximumPrice],
+        slide: function(event, ui) {
+            var minVal = ui.values[0];
+            minamount.val(minVal + '$');
+            if (minVal > 0) {
+                $("[name=minimumPrice]").val(minVal);
+                $("[name=minimumPrice]").removeAttr("disabled");
+            } else {
+                $("[name=minimumPrice]").val("");
+                $("[name=minimumPrice]").attr("disabled", "disabled");
+            }
+            var maxVal = ui.values[1];
+            maxamount.val(maxVal + '$');
+            if (maxVal < @Model.MaximumPrice) {
+                $("[name=maximumPrice]").val(maxVal);
+                $("[name=maximumPrice]").removeAttr("disabled");
+            } else {
+                $("[name=maximumPrice]").val("");
+                $("[name=maximumPrice]").attr("disabled", "disabled");
+            }
+        }
+    });
+    minamount.val(rangeSlider.slider("values", 0) + '$');
+    maxamount.val(rangeSlider.slider("values", 1) + '$');
+});
+
+$("priceRangeForm").submit(function(e) {
+    var ItemIdArray = [];
+    var ItemsIdsCommaSeparated = "";
+    $("#categoryArea input[type=checkbox]").each(function(index, val) {
+        var Id = $(val).attr("id");
+        var ischecked = $("#" + Id).is(":checked", true);
+        if (ischecked) {
+            var array = Id.split("_");
+            var ItemId = array[1];
+            ItemIdArray.push(ItemId);
+        }
+        ItemsIdsCommaSeparated = ItemIdArray.toString();
+
+
+    })
+
+    Sendi(ItemsIdsCommaSeparated);
+    e.preventDefault();
+});
+
+    function Search() {
+        clearTimeout(searchTimeout);
+        var n = $("#searchURL").val();
+        n &&
+            (searchTimeout = setTimeout(function() {
+                var t = n,
+                    i = $("[name=minimumPrice]").val(""),
+                    r = $("[name=maximumPrice]").val(""),
+                    v = '@Model.ShopStyle';
+                i && (t = t + (t.includes("?") ? "&" : "?") + "minimumPrice" + i);
+                r && (t = t + (t.includes("?") ? "&" : "?") + "maximumPrice" + r);
+                v && (t = t + (t.includes("?") ? "&" : "?") + "shopstyle=" + v);
+window.location.href = t;
+            }, 100));
+    }
+function Sendi(ItemsIdsCommaSeparated) {
+     $.ajax({
+            type:"post",
+            url: '@Url.Action("FilterForProduct", "Product")',
+            data: {
+                ItemIds: ItemsIdsCommaSeparated,
+                minimumPrice: $("[name=minimumPrice]").val(),
+                maximumPrice: $("[name=maximumPrice]").val(),
+                shopstyle: '@Model.ShopStyle',
+                searchTerm: $("#searchTerm").val()
+                                         
+               
+            }
+
+        }).done(function(response) {              
+                $("#productsDiv").html(response);
+                window.location.href = "#productsDiv"
+        })
+}
+
+
+    </script>
+
+
+    <script>
+$("#actionButton").click(function(){ 
+    var ItemIdArray = [];
+    var ItemsIdsCommaSeparated = "";
+    $("#categoryArea input[type=checkbox]").each(function(index, val) {
+        var Id = $(val).attr("id");
+        var ischecked = $("#" + Id).is(":checked", true);
+        if (ischecked) {
+            var array = Id.split("_");
+            var ItemId = array[1];
+            ItemIdArray.push(ItemId);
+        }
+        ItemsIdsCommaSeparated = ItemIdArray.toString();
+
+
+    })
+    $.ajax({
+        url: '@Url.Action("FilterForProduct","Product")',
+        type: 'post',
+        data: {
+            ItemIds: ItemsIdsCommaSeparated,
+            shopstyle: '@Model.ShopStyle',
+            searchTerm: $("#searchTerm").val(),
+            minimumPrice: $("[name=minimumPrice]").val(),
+            maximumPrice: $("[name=maximumPrice]").val()
+        }
+        })
+        .done(function(response) {
+            $("#productsDiv").html(response);
+        });
+        
+    });
+   </script>
+
+   <script>         
+ 
+var SaveItems = function() {
+    var ItemIdArray = [];
+    var ItemsIdsCommaSeparated = "";
+    $("#categoryArea input[type=checkbox]").each(function(index, val) {
+        var Id = $(val).attr("id");
+        var ischecked = $("#" + Id).is(":checked", true);
+        if (ischecked) {
+            var array = Id.split("_");
+            var ItemId = array[1];
+            ItemIdArray.push(ItemId);
+        }
+        ItemsIdsCommaSeparated = ItemIdArray.toString();
+
+
+    })
+    if (ItemIdArray.length != 0) {
+        $.ajax({
+            type: 'post',
+            url: '@Url.Action("FilterForProduct", "Product")',
+            data: {
+                ItemIds: ItemsIdsCommaSeparated,
+                shopstyle: '@Model.ShopStyle',
+                sortBy: '@Model.SortBy',
+                searchTerm: $("#searchTerm").val(),
+                minimumPrice: $("[name=minimumPrice]").val(),
+                maximumPrice: $("[name=maximumPrice]").val()
+            }
+
+        })
+            .done(function(response) {
+                console.log("done");
+                $("#productsDiv").html(response);
+            })
+            .fail(function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("fail");
+                alert("FAIL");
+            })
+            .always(function() {
+                console.log("always");
+
+            });
+        console.log("getdata out");
+    }
+}
+    </script>
+    <script>
+    $(".pageDataLink").click(function() {
+    debugger;
+    var url = $(this).attr("data-href");
+
+    if (url != "" || url != undefined){
+    GetData(url);
+    }
+
+    });
+  </script>
+    <script>
+
+    function GetData(dUrl){
+        console.log("getdata in");
+         var ItemIdArray = [];
+    var ItemsIdsCommaSeparated = "";
+    $("#categoryArea input[type=checkbox]").each(function(index, val) {
+        var Id = $(val).attr("id");
+        var ischecked = $("#" + Id).is(":checked", true);
+        if (ischecked) {
+            var array = Id.split("_");
+            var ItemId = array[1];
+            ItemIdArray.push(ItemId);
+        }
+        ItemsIdsCommaSeparated = ItemIdArray.toString();
+
+
+    })
+    $.ajax({
+            type: 'post',
+            url: dUrl,
+            data: {
+                ItemIds: ItemsIdsCommaSeparated,
+                shopstyle: '@Model.ShopStyle',                
+                searchTerm: $("#searchTerm").val(),
+                minimumPrice: $("[name=minimumPrice]").val(),
+                maximumPrice: $("[name=maximumPrice]").val()
+            }
+
+        })
+        .done(function(response) {
+                console.log("done");
+                console.log(response)
+                $("#productsDiv").html(response);
+                window.location.href = "#productsDiv"
+            })
+            .fail(function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("fail");
+                alert("FAIL");
+            })
+            .always(function() {
+                console.log("always");
+
+            });
+        console.log("getdata out");
+    }
+    </script>
+
+
+
+
+     @* <script>
+var callTimeout;
+var priceSlider = $("#slide-range");
+priceSlider.slider({
+    range:true,
+    min:0,
+    max:150000,
+    values:[@Model.MinPrice, @Model.MaximumPrice],
+    slide: function(event, ui) {
+        var minPrice = ui.values[0];
+        var maxPrice = ui.values[1];
+        console.log("changed")
+
+        $("#amount").val("$" + minPrice + ".00" + " - " + maxPrice + ".00");
+
+        clearTimeout(callTimeout);
+        callTimeout = setTimeout(PriceRangeChange, 500);
+    }
+})
+        </script>*@

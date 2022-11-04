@@ -1,0 +1,68 @@
+﻿@model Shop.Application.Products.Queries.GetProductDetails.ProductDetailsVm
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+
+    <h4>Product</h4>
+    <hr />
+
+   <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductBrand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductImage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody> 
+            <tr>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.ProductBrand)
+            </td>      
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.ProductModel)
+            </td>   
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.ProductDescription)
+            </td>   
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Price)
+            </td> 
+            <td>    
+                @if (Model.ProductImage != null)
+               {
+           <img class="img-responsive" src="@Url.Content(Model.ProductImage)" alt=""> 
+                }
+                
+            </td>
+            </tr>
+            </table>
+            
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ProductID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
