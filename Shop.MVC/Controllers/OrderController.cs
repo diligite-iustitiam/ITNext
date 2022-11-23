@@ -12,7 +12,7 @@ using WebProjectOnAzure.Helpers;
 using Stripe;
 using Shop.Application.Interfaces;
 
-namespace WebProjectOnAzure.Controllers
+namespace Shop.MVC.Controllers
 {
     public class OrderController : Controller
     {

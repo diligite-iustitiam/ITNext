@@ -14,7 +14,7 @@ using WebProjectOnAzure.Models;
 using static WebProjectOnAzure.ViewModels.ShopViewModels;
 using Shop.MVC.Interfaces;
 
-namespace WebProjectOnAzure.Controllers
+namespace Shop.MVC.Controllers
 {
     public class ProductController : BaseController
     {

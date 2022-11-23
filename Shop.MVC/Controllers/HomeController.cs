@@ -8,7 +8,7 @@ using WebProjectOnAzure.Services;
 using Shop.Application.Interfaces;
 using Shop.Application.Products.Queries.GetProductList;
 
-namespace WebProjectOnAzure.Controllers
+namespace Shop.MVC.Controllers
 {
     public class HomeController : BaseController
     {

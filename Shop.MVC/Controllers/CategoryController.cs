@@ -9,7 +9,7 @@ using WebProjectOnAzure.Data;
 using Shop.Domain;
 using Shop.Application.Interfaces;
 
-namespace WebProjectOnAzure.Controllers
+namespace Shop.MVC.Controllers
 {
     public class CategoryController : Controller
     {

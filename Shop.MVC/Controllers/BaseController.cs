@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebProjectOnAzure.Controllers
+namespace Shop.MVC.Controllers
 {
     public abstract class BaseController : Controller
     {
